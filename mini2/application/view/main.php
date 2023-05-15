@@ -7,7 +7,7 @@
     <meta name="keywords" content="Anime, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Anime | Template</title>
+    <title>Anime | main</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -47,17 +47,17 @@
                                 <li class="active"><a href="/anime/main">Anime Home</a></li>
                                 <li><a href="/anime/detail">Anime Details</a></li>
                                 <li><a href="/anime/watching">Anime Watching</a></li>
-                                <li><a href="/user/signup">Sign Up</a></li>
                                 <?php if (isset($_SESSION[_STR_LOGIN_ID])) { ?>
-                                <li><a href="/user/logout">Logout</a></li>
-                                <!-- <button id="logout" onclick="redirectLogout();">Logout</button>
+                                    <li><a href="/user/logout">Logout</a></li>
+                                    <!-- <button id="logout" onclick="redirectLogout();">Logout</button>
                                 <script>
                                     function redirectLogout() {
                                         location.href = "/user/logout"
                                     }
                                 </script> -->
                                 <?php } else { ?>
-                                <li><a href="/user/login">Login</a></li>
+                                    <li><a href="/user/signup">Sign Up</a></li>
+                                    <li><a href="/user/login">Login</a></li>
                                 <?php } ?>
                             </ul>
                         </nav>

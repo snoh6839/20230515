@@ -24,7 +24,7 @@ class UserController extends Controller {
     {
         session_unset();
         session_destroy();
-        return "login" . _EXTENTION_PHP;
+        return "main" . _EXTENTION_PHP;
     }
 
     public function signupGet()
@@ -37,9 +37,9 @@ class UserController extends Controller {
         // $this->model->conn->beginTransaction();
         $result = $this->model->getUser($_POST);
         if ( count($result) > 0 ) {
-            $errMsg = "This User Already Exists. Please Login.";
+            $errMsg = ": This User Already Exists. Please Login or Use Other Id";
             $this->addDynamicProperty("errMsg", $errMsg);
-            return "login" . _EXTENTION_PHP;
+            return "signup" . _EXTENTION_PHP;
             $this->model->closeConn();
         } else {
             // $this->model->conn->beginTransaction();
@@ -49,7 +49,7 @@ class UserController extends Controller {
                 ,'name' => $_POST['name']
             );
             $this->model->setUser($data);
-            $errMsg = "Successfully Signed Up. Please Login.";
+            $errMsg = ": Successfully Signed Up. Please Login.";
             $this->addDynamicProperty("errMsg", $errMsg);
             return "login" . _EXTENTION_PHP;
         }

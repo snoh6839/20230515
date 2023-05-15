@@ -11,8 +11,8 @@ class Application {
         // $arrPath = $getPath !== "" ? explode("/", $getPath) : "";
 
         $arrPath = UrlUtil::getUrlArrPath(); //get url by arr
-        $identityName = empty($arrPath[0]) ? "User" : ucfirst($arrPath[0]);
-        $action = (empty($arrPath[1]) ? "login" : $arrPath[1]). ucfirst(strtolower($_SERVER["REQUEST_METHOD"]));
+        $identityName = empty($arrPath[0]) ? "Anime" : ucfirst($arrPath[0]);
+        $action = (empty($arrPath[1]) ? "main" : $arrPath[1]). ucfirst(strtolower($_SERVER["REQUEST_METHOD"]));
         
         //controller name
         $controllerPath = _PATH_CONTROLLER.$identityName. _BASE_FILENAME_CONTROLLER._EXTENTION_PHP;

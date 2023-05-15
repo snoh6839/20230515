@@ -99,3 +99,15 @@
      });
 
 })(jQuery);
+
+const recomImg = document.querySelector('.recom-img>img');
+const recomBtn = document.querySelector('.recom-btn');
+let photoNum;
+
+function recomAni() {
+    photoNum = Math.floor(Math.random() * 10);
+    recomImg.src = `/img/recom/recom-${photoNum}.jpg`;
+}
+
+recomAni();
+recomBtn.addEventListener("click", recomAni);

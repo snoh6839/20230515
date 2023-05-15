@@ -71,6 +71,7 @@ class UserModel extends Model
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($prepare);
             $this->conn->commit();
+            
         } catch (Exception $e) {
             // $this->conn->rollBack();
             echo "UserModel -> getUser Error : " . $e->getMessage();

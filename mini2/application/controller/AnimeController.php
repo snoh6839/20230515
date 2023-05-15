@@ -11,6 +11,11 @@ class AnimeController extends Controller {
         return "main" . _EXTENTION_PHP;
     }
 
+    public function watchingGet()
+    {
+        return "watching" . _EXTENTION_PHP;
+    }
+
     // public function loginPost()
     // {
     //     return _BASE_REDIRECT."/index";
