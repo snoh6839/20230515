@@ -19,12 +19,6 @@
         <input type="text" name="pw" id="pw">
         <button type="submit">Login</button>
     </form>
-    <button id="signup" onclick="redirectSignUp();">회원등록</button>
-    <script>
-        function redirectSignUp() {
-            location.href = "/user/signup"
-        }
-    </script>
 </body>
 
 </html>

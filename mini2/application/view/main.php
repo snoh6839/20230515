@@ -48,7 +48,17 @@
                                 <li><a href="/anime/detail">Anime Details</a></li>
                                 <li><a href="/anime/watching">Anime Watching</a></li>
                                 <li><a href="/user/signup">Sign Up</a></li>
+                                <?php if (isset($_SESSION[_STR_LOGIN_ID])) { ?>
+                                <li><a href="/user/logout">Logout</a></li>
+                                <!-- <button id="logout" onclick="redirectLogout();">Logout</button>
+                                <script>
+                                    function redirectLogout() {
+                                        location.href = "/user/logout"
+                                    }
+                                </script> -->
+                                <?php } else { ?>
                                 <li><a href="/user/login">Login</a></li>
+                                <?php } ?>
                             </ul>
                         </nav>
                     </div>

@@ -8,7 +8,7 @@ use \AllowDynamicProperties;
 class Controller {
     protected $model;
     private static $modelList = [];
-    private static $arrNeedAuth = ["anime/detail"];
+    private static $arrNeedAuth = ["anime/detail", "user/logout"];
 
     public function __construct($identityName, $action)
     {
@@ -67,7 +67,7 @@ class Controller {
         $urlPath = UrlUtil::getUrl();
         foreach (self::$arrNeedAuth as $authPath) {
             if(!isset($_SESSION[_STR_LOGIN_ID]) && strpos($urlPath, $authPath) === 0){
-                header(_BASE_REDIRECT."/user/login");
+                header(_BASE_REDIRECT."/anime/main");
                 exit();
             } 
         }
