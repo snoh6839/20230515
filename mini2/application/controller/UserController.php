@@ -35,7 +35,7 @@ class UserController extends Controller {
     public function signupPost()
     {
         // $this->model->conn->beginTransaction();
-        $result = $this->model->getUser($_POST);
+        $result = $this->model->getUserId($_POST);
         
         if (count($result) > 0) {
             $errMsg = ": This User Already Exists. Please Login or Use Other Id";
