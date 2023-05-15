@@ -118,9 +118,9 @@
                                 <img>
                             </div>
                             <br>
-                            <div class="recom-btn site-btn">
+                            <button type="button" class="recom-btn site-btn">
                                 다른 추천 보기[click]
-                            </div>
+                            </button>
                         </div>
                     </div>
                 </div>
