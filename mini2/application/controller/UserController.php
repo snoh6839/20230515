@@ -36,7 +36,8 @@ class UserController extends Controller {
     {
         // $this->model->conn->beginTransaction();
         $result = $this->model->getUser($_POST);
-        if ( count($result) > 0 ) {
+        
+        if (count($result) > 0) {
             $errMsg = ": This User Already Exists. Please Login or Use Other Id";
             $this->addDynamicProperty("errMsg", $errMsg);
             return "signup" . _EXTENTION_PHP;
@@ -52,6 +53,7 @@ class UserController extends Controller {
             $errMsg = ": Successfully Signed Up. Please Login.";
             $this->addDynamicProperty("errMsg", $errMsg);
             return "login" . _EXTENTION_PHP;
+            $this->model->closeConn();
         }
     
 
