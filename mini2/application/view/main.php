@@ -74,20 +74,21 @@
     <section class="hero">
         <div class="container">
             <div class="hero__slider owl-carousel">
-                <?php foreach ($arrGet as $recode) { ?>
-                <div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $recode["anime_no"] ?>.jpg">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <h2><?php echo $recode["anime_name"] ?></h2>
-                                <p><?php echo $recode["anime_description"] ?></p>
-                                <a href="/anime/detail.php?anime_no=<?php echo $recode["anime_no"] ?>"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
+                
+                <?php foreach ($this->model->getDetail($_GET) as $recode) { ?>
+                    <div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $recode["anime_no"] ?>.jpg">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="hero__text">
+                                    <h2><?php echo $recode["anime_name"] ?></h2>
+                                    <p><?php echo $recode["anime_description"] ?></p>
+                                    <a href="/anime/detail.php?anime_no=<?php echo $recode["anime_no"] ?>"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 <?php } ?>
-                <div class="hero__items set-bg" data-setbg="/img/hero/hero-1.jpg">
+                <div class="hero__items set-bg" data-setbg="/img/hero/hero-2.jpg">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="hero__text">

@@ -73,7 +73,9 @@ class UserController extends Controller {
                             $this->model->closeConn();
                         } else {
                             $data = array(
-                                'id' => $arrPost['id'], 'pw' => $arrPost['pw'], 'name' => $arrPost['name']
+                                'id' => $arrPost['id']
+                                , 'pw' => $arrPost['pw']
+                                , 'name' => $arrPost['name']
                             );
                             $this->model->setUser($data);
                             $errMsg = ": Successfully Signed Up. Please Login.";

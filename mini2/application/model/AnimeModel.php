@@ -5,29 +5,28 @@ use Exception;
 
 class AnimeModel extends Model
 {
-    public function getDetail($arrAnimeData)
+    public function getDetail($arr)
     {
         $sql =
-        " select "
-        . " * "
-        . " From "
-        . " anime_data "
-        . " where "
-        . " anime_no = :anime_no "
-        . " and "
-        . " limit = :limit"
-        . " oder by "
-        . " views "
-        ." DESC ";
+            " SELECT "
+            ." * "
+            ." FROM "
+            ." anime_data "
+            ." WHERE "
+            . " anime_category = :anime_category "
+            ." ORDER BY "
+            ." views "
+            ." DESC ";
+            // ." LIMIT "
+            // ." :limit_num";
         $prepare = [
-            ":anime_no" => $arrAnimeData["anime_no"]
-            , ":limit" => $arrAnimeData["limit_num"]
+            // ":anime_no" => $arr["anime_no"],
+            ":anime_category" => $arr["anime_category"]
         ];
         try {
-            $this->conn->beginTransaction();
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute($prepare);
             $result = $stmt->fetchAll();
+            return $result; // Return the query results
         } catch (Exception $e) {
             echo "AnimeModel -> getAnime Error : " . $e->getMessage();
             exit();

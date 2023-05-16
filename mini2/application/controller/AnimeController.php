@@ -3,26 +3,22 @@ namespace application\controller;
 
 class AnimeController extends Controller {
     public function detailGet() {
-        $arrGet = $_GET;
-        $limit_num = 3;
-        $this->model->getDetail($arrGet);
-        $arrAnimeData =
-        array(
-            "anime_no" => $arrGet['anime_no'], "limit_num" => $limit_num
-        );
         return "detail". _EXTENTION_PHP;
     }
-    
+
 
     public function mainGet()
     {
-        $arrGet = $_GET;
-        $limit_num = 3;
-        $this->model->getDetail($arrGet);
-        $arrAnimeData =
-        array(
-            "anime_no" => $arrGet['anime_no'], "limit_num" => $limit_num
-        );
+        // $arrGet = $_GET;
+        $_GET['anime_category'] = 'hero';
+        $this->model->getDetail($_GET);
+        
+        // // if(isset($_GET['anime_no'])) {
+        // // var_dump($_GET);
+        // // // $anime_no = $arrGet['anime_no'];
+        // $prepare['limit_num'] = 3;
+        // // $limit_num = 3;
+        // // }
         return "main" . _EXTENTION_PHP;
     }
 
