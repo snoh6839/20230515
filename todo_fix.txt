@@ -1,19 +1,6 @@
-todo fix = doesn't display anything;
-
-<?php foreach ($this->model->getDetail($_GET) as $recode) { ?>
-                    <div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $recode["anime_no"] ?>.jpg">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="hero__text">
-                                    <h2><?php echo $recode["anime_name"] ?></h2>
-                                    <p><?php echo $recode["anime_description"] ?></p>
-                                    <a href="/anime/detail.php?anime_no=<?php echo $recode["anime_no"] ?>"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
+to do fix = mvc pattern /  controll (if there's no get set default as hero) // main get -> object
+model = 
+<?php
 
 namespace application\model;
 use Exception;
@@ -40,6 +27,7 @@ class AnimeModel extends Model
         ];
         try {
             $stmt = $this->conn->prepare($sql);
+            $stmt->execute($prepare);
             $result = $stmt->fetchAll();
             return $result; // Return the query results
         } catch (Exception $e) {
@@ -49,7 +37,7 @@ class AnimeModel extends Model
     }
 }
 
-
+controller =
 <?php
 namespace application\controller;
 
@@ -61,17 +49,16 @@ class AnimeController extends Controller {
 
     public function mainGet()
     {
-        // $arrGet = $_GET;
-        $_GET['anime_category'] = 'hero';
-        $this->model->getDetail($_GET);
         
-        // // if(isset($_GET['anime_no'])) {
-        // // var_dump($_GET);
-        // // // $anime_no = $arrGet['anime_no'];
-        // $prepare['limit_num'] = 3;
-        // // $limit_num = 3;
-        // // }
         return "main" . _EXTENTION_PHP;
+    }
+
+    public function animeDetailsGet($arrGet)
+    {
+        $arrGet = $_GET;
+        $arrGet['anime_category'] = 'hero';
+        $animeDetails = $this->model->getDetail($arrGet);
+        return $animeDetails;
     }
 
     public function watchingGet()
@@ -84,3 +71,20 @@ class AnimeController extends Controller {
     //     return _BASE_REDIRECT."/index";
     // }
 }
+
+main.php =
+<?php
+                
+                foreach ($this->animeDetailsGet as $recode) { ?>
+                    <div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $recode["anime_no"] ?>.jpg">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="hero__text">
+                                    <h2><?php echo $recode["anime_name"] ?></h2>
+                                    <p><?php echo $recode["anime_description"] ?></p>
+                                    <a href="/anime/detail.php?anime_no=<?php echo $recode["anime_no"] ?>"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
