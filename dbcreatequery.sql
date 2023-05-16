@@ -1,38 +1,6 @@
-Table user_info
-columns
-1. user_no
-2. user_id
-3. user_pw
-4. user_name
+CREATE DATABASE animesite;
 
-Table user_comment
-columns
-1. comment_no
-2. user_no
-3. comment_content
-4. comment_date
-
-Table anime_data
-columns
-1. anime_no
-2. anime_name
-3. anime_description
-4. anime_type
-5. anime_studios
-6. anime_date
-7. anime_status
-8. anime_genre
-9. anime_scores
-10. anime_rating
-11. anime_duration
-12. anime_quality
-13. views
-
-Table follows
-columns
-1. user_no
-2. anime_no
-3. follow_flag
+USE animesite;
 
 -- Table user_info
 CREATE TABLE user_info (
@@ -50,6 +18,8 @@ CREATE TABLE user_comment (
   comment_date DATETIME NOT NULL,
   FOREIGN KEY (user_no) REFERENCES user_info (user_no)
 );
+
+ALTER TABLE user_comment ALTER COLUMN comment_date SET DEFAULT NOW();
 
 -- Table anime_data
 CREATE TABLE anime_data (
@@ -76,3 +46,7 @@ CREATE TABLE follows (
   FOREIGN KEY (user_no) REFERENCES user_info (user_no),
   FOREIGN KEY (anime_no) REFERENCES anime_data (anime_no)
 );
+
+ALTER TABLE follows ALTER COLUMN follow_flag SET DEFAULT '0';
+
+COMMIT;

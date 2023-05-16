@@ -6,7 +6,7 @@ define("_ROOT", $_SERVER["DOCUMENT_ROOT"]);
 define("_DB_HOST", "localhost");
 define("_DB_USER", "root");
 define("_DB_PASSWORD", "root506");
-define("_DB_NAME", "minitwo");
+define("_DB_NAME", "animesite");
 define("_DB_CHARSET", "utf8mb4");
 
 // else
