@@ -101,7 +101,7 @@
                             <div class="anime__details__title">
                                 <h3>바이올렛 애버가든: 영원과 자동수기 인형</h3>
                             </div>
-                            <div class="anime__details__rating">
+                            <!-- <div class="anime__details__rating">
                                 <div class="rating">
                                     <a href="#"><i class="fa fa-star"></i></a>
                                     <a href="#"><i class="fa fa-star"></i></a>
@@ -110,7 +110,7 @@
                                     <a href="#"><i class="fa fa-star-half-o"></i></a>
                                 </div>
                                 <span>1.029 Votes</span>
-                            </div>
+                            </div> -->
                             <p>
                                 "고객님이 원하시면 어디든지 달려가겠습니다.
                                 자동 수기인형 서비스, 바이올렛 에버가든입니다."
@@ -164,7 +164,7 @@
                         </div>
                         <div class="anime__review__item">
                             <div class="anime__review__item__pic">
-                                </img src="/img/anime/review-2.jpg" alt="">
+                                </img src="/img/anime/review-1.jpg" alt="">
                             </div>
                             <div class="anime__review__item__text">
                                 <h6>Lewis Mann - <span>5 Hour ago</span></h6>
@@ -173,7 +173,7 @@
                         </div>
                         <div class="anime__review__item">
                             <div class="anime__review__item__pic">
-                                </img src="/img/anime/review-3.jpg" alt="">
+                                </img src="/img/anime/review-1.jpg" alt="">
                             </div>
                             <div class="anime__review__item__text">
                                 <h6>Louis Tyler - <span>20 Hour ago</span></h6>
@@ -182,7 +182,7 @@
                         </div>
                         <div class="anime__review__item">
                             <div class="anime__review__item__pic">
-                                </img src="/img/anime/review-4.jpg" alt="">
+                                </img src="/img/anime/review-1.jpg" alt="">
                             </div>
                             <div class="anime__review__item__text">
                                 <h6>Chris Curry - <span>1 Hour ago</span></h6>
@@ -192,7 +192,7 @@
                         </div>
                         <div class="anime__review__item">
                             <div class="anime__review__item__pic">
-                                </img src="/img/anime/review-5.jpg" alt="">
+                                </img src="/img/anime/review-1.jpg" alt="">
                             </div>
                             <div class="anime__review__item__text">
                                 <h6>Lewis Mann - <span>5 Hour ago</span></h6>
@@ -201,7 +201,7 @@
                         </div>
                         <div class="anime__review__item">
                             <div class="anime__review__item__pic">
-                                </img src="/img/anime/review-6.jpg" alt="">
+                                </img src="/img/anime/review-1.jpg" alt="">
                             </div>
                             <div class="anime__review__item__text">
                                 <h6>Louis Tyler - <span>20 Hour ago</span></h6>

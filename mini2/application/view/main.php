@@ -124,11 +124,11 @@
                                     <h4>Trending Now</h4>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
+                            <!-- <div class="col-lg-4 col-md-4 col-sm-4">
                                 <div class="btn__all">
                                     <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-sm-6">
@@ -139,10 +139,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">센과 치히로의 행방불명</a></h5>
                                     </div>
                                 </div>
@@ -155,10 +155,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Gintama Movie 2: Kanketsu-hen - Yorozuya yo Eien</a></h5>
                                     </div>
                                 </div>
@@ -171,10 +171,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Shingeki no Kyojin Season 3 Part 2</a></h5>
                                     </div>
                                 </div>
@@ -187,10 +187,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Fullmetal Alchemist: Brotherhood</a></h5>
                                     </div>
                                 </div>
@@ -203,10 +203,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Shiratorizawa Gakuen Koukou</a></h5>
                                     </div>
                                 </div>
@@ -219,10 +219,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Code Geass: Hangyaku no Lelouch R2</a></h5>
                                     </div>
                                 </div>
@@ -236,11 +236,11 @@
                                     <h4>Popular Shows</h4>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
+                            <!-- <div class="col-lg-4 col-md-4 col-sm-4">
                                 <div class="btn__all">
                                     <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-sm-6">
@@ -251,10 +251,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Sen to Chihiro no Kamikakushi</a></h5>
                                     </div>
                                 </div>
@@ -267,10 +267,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Kizumonogatari III: Reiket su-hen</a></h5>
                                     </div>
                                 </div>
@@ -283,10 +283,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
                                     </div>
                                 </div>
@@ -299,10 +299,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Rurouni Kenshin: Meiji Kenkaku Romantan</a></h5>
                                     </div>
                                 </div>
@@ -315,10 +315,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Mushishi Zoku Shou 2nd Season</a></h5>
                                     </div>
                                 </div>
@@ -331,10 +331,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Monogatari Series: Second Season</a></h5>
                                     </div>
                                 </div>
@@ -348,11 +348,11 @@
                                     <h4>Recently Added Shows</h4>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
+                            <!-- <div class="col-lg-4 col-md-4 col-sm-4">
                                 <div class="btn__all">
                                     <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-sm-6">
@@ -363,10 +363,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Great Teacher Onizuka</a></h5>
                                     </div>
                                 </div>
@@ -379,10 +379,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Fate/stay night Movie: Heaven's Feel - II. Lost</a></h5>
                                     </div>
                                 </div>
@@ -395,10 +395,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Mushishi Zoku Shou: Suzu no Shizuku</a></h5>
                                     </div>
                                 </div>
@@ -411,10 +411,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Fate/Zero 2nd Season</a></h5>
                                     </div>
                                 </div>
@@ -427,10 +427,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Kizumonogatari II: Nekket su-hen</a></h5>
                                     </div>
                                 </div>
@@ -443,10 +443,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
                                     </div>
                                 </div>
@@ -460,11 +460,11 @@
                                     <h4>Live Action</h4>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
+                            <!-- <div class="col-lg-4 col-md-4 col-sm-4">
                                 <div class="btn__all">
                                     <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-sm-6">
@@ -475,10 +475,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Shouwa Genroku Rakugo Shinjuu</a></h5>
                                     </div>
                                 </div>
@@ -491,10 +491,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Mushishi Zoku Shou 2nd Season</a></h5>
                                     </div>
                                 </div>
@@ -507,10 +507,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Mushishi Zoku Shou: Suzu no Shizuku</a></h5>
                                     </div>
                                 </div>
@@ -523,10 +523,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
                                     </div>
                                 </div>
@@ -539,10 +539,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Fate/stay night Movie: Heaven's Feel - II. Lost</a></h5>
                                     </div>
                                 </div>
@@ -555,10 +555,10 @@
                                         <div class="view"><i class="fa fa-eye"></i> 961223</div>
                                     </div>
                                     <div class="product__item__text">
-                                        <ul>
+                                        <!-- <ul>
                                             <li>Active</li>
                                             <li>Movie</li>
-                                        </ul>
+                                        </ul> -->
                                         <h5><a href="#">Kizumonogatari II: Nekketsu-hen</a></h5>
                                     </div>
                                 </div>
@@ -572,12 +572,12 @@
                             <div class="section-title">
                                 <h5>Top Views</h5>
                             </div>
-                            <ul class="filter__controls">
+                            <!-- <ul class="filter__controls">
                                 <li class="active" data-filter="*">Day</li>
                                 <li data-filter=".week">Week</li>
                                 <li data-filter=".month">Month</li>
                                 <li data-filter=".years">Years</li>
-                            </ul>
+                            </ul> -->
                             <div class="filter__gallery">
                                 <div class="product__sidebar__view__item set-bg mix day years" data-setbg="/img/sidebar/tv-1.jpg">
                                     <div class="ep">18 / ?</div>
@@ -615,10 +615,10 @@
                                     </img src="/img/sidebar/comment-1.jpg" alt="">
                                 </div>
                                 <div class="product__sidebar__comment__item__text">
-                                    <ul>
+                                    <!-- <ul>
                                         <li>Active</li>
                                         <li>Movie</li>
-                                    </ul>
+                                    </ul> -->
                                     <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
                                     <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
                                 </div>
@@ -628,10 +628,10 @@
                                     </img src="/img/sidebar/comment-2.jpg" alt="">
                                 </div>
                                 <div class="product__sidebar__comment__item__text">
-                                    <ul>
+                                    <!-- <ul>
                                         <li>Active</li>
                                         <li>Movie</li>
-                                    </ul>
+                                    </ul> -->
                                     <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
                                     <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
                                 </div>
@@ -641,10 +641,10 @@
                                     </img src="/img/sidebar/comment-3.jpg" alt="">
                                 </div>
                                 <div class="product__sidebar__comment__item__text">
-                                    <ul>
+                                    <!-- <ul>
                                         <li>Active</li>
                                         <li>Movie</li>
-                                    </ul>
+                                    </ul> -->
                                     <h5><a href="#">Kizumonogatari III: Reiket su-hen</a></h5>
                                     <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
                                 </div>
@@ -654,10 +654,10 @@
                                     </img src="/img/sidebar/comment-4.jpg" alt="">
                                 </div>
                                 <div class="product__sidebar__comment__item__text">
-                                    <ul>
+                                    <!-- <ul>
                                         <li>Active</li>
                                         <li>Movie</li>
-                                    </ul>
+                                    </ul> -->
                                     <h5><a href="#">Monogatari Series: Second Season</a></h5>
                                     <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
                                 </div>
