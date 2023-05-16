@@ -74,43 +74,19 @@
     <section class="hero">
         <div class="container">
             <div class="hero__slider owl-carousel">
-                <?php
-                
-                foreach ($this->animeDetailsGet as $recode) { ?>
-                    <div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $recode["anime_no"] ?>.jpg">
+                <?php foreach ($this->animeDetailsGet() as $record) { ?>
+                    <div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $record["anime_no"] ?>.jpg">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="hero__text">
-                                    <h2><?php echo $recode["anime_name"] ?></h2>
-                                    <p><?php echo $recode["anime_description"] ?></p>
-                                    <a href="/anime/detail.php?anime_no=<?php echo $recode["anime_no"] ?>"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
+                                    <h2><?php echo $record["anime_name"] ?></h2>
+                                    <p><?php echo $record["anime_description"] ?></p>
+                                    <a href="/anime/detail?anime_no=<?php echo $record["anime_no"] ?>"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
-                <div class="hero__items set-bg" data-setbg="/img/hero/hero-2.jpg">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <h2>스파이 패밀리</h2>
-                                <p>사람들은 누구나 아무에게도 보여줄 수 없는 자신을 가지고 있다</p>
-                                <a href="#"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero__items set-bg" data-setbg="/img/hero/hero-3.jpg">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <h2>진격의 거인</h2>
-                                <p>그날, 인류는 떠올렸다. 놈들에게 지배당해왔던 공포를...</p>
-                                <a href="#"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

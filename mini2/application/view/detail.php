@@ -101,16 +101,6 @@
                             <div class="anime__details__title">
                                 <h3>바이올렛 애버가든: 영원과 자동수기 인형</h3>
                             </div>
-                            <!-- <div class="anime__details__rating">
-                                <div class="rating">
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star-half-o"></i></a>
-                                </div>
-                                <span>1.029 Votes</span>
-                            </div> -->
                             <p>
                                 "고객님이 원하시면 어디든지 달려가겠습니다.
                                 자동 수기인형 서비스, 바이올렛 에버가든입니다."
@@ -153,9 +143,9 @@
                             <h5>Reviews</h5>
                         </div>
                         <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
+                            <!-- <div class="anime__review__item__pic">
                                 </img src="/img/anime/review-1.jpg" alt="">
-                            </div>
+                            </div> -->
                             <div class="anime__review__item__text">
                                 <h6>Chris Curry - <span>1 Hour ago</span></h6>
                                 <p>whachikan Just noticed that someone categorized this as belonging to the genre
@@ -163,27 +153,27 @@
                             </div>
                         </div>
                         <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
+                            <!-- <div class="anime__review__item__pic">
                                 </img src="/img/anime/review-1.jpg" alt="">
-                            </div>
+                            </div> -->
                             <div class="anime__review__item__text">
                                 <h6>Lewis Mann - <span>5 Hour ago</span></h6>
                                 <p>Finally it came out ages ago</p>
                             </div>
                         </div>
                         <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
+                            <!-- <div class="anime__review__item__pic">
                                 </img src="/img/anime/review-1.jpg" alt="">
-                            </div>
+                            </div> -->
                             <div class="anime__review__item__text">
                                 <h6>Louis Tyler - <span>20 Hour ago</span></h6>
                                 <p>Where is the episode 15 ? Slow update! Tch</p>
                             </div>
                         </div>
                         <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
+                            <!-- <div class="anime__review__item__pic">
                                 </img src="/img/anime/review-1.jpg" alt="">
-                            </div>
+                            </div> -->
                             <div class="anime__review__item__text">
                                 <h6>Chris Curry - <span>1 Hour ago</span></h6>
                                 <p>whachikan Just noticed that someone categorized this as belonging to the genre
@@ -191,18 +181,18 @@
                             </div>
                         </div>
                         <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
+                            <!-- <div class="anime__review__item__pic">
                                 </img src="/img/anime/review-1.jpg" alt="">
-                            </div>
+                            </div> -->
                             <div class="anime__review__item__text">
                                 <h6>Lewis Mann - <span>5 Hour ago</span></h6>
                                 <p>Finally it came out ages ago</p>
                             </div>
                         </div>
                         <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
+                            <!-- <div class="anime__review__item__pic">
                                 </img src="/img/anime/review-1.jpg" alt="">
-                            </div>
+                            </div> -->
                             <div class="anime__review__item__text">
                                 <h6>Louis Tyler - <span>20 Hour ago</span></h6>
                                 <p>Where is the episode 15 ? Slow update! Tch</p>

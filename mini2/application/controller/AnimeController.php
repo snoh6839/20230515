@@ -1,22 +1,24 @@
 <?php
 namespace application\controller;
 
-class AnimeController extends Controller {
-    public function detailGet() {
-        return "detail". _EXTENTION_PHP;
-    }
+class AnimeController extends Controller
+{
 
+    public function detailGet()
+    {
+        return "detail" . _EXTENTION_PHP;
+    }
 
     public function mainGet()
     {
-        
         return "main" . _EXTENTION_PHP;
     }
 
-    public function animeDetailsGet($arrGet)
+    public function animeDetailsGet()
     {
         $arrGet = $_GET;
-        $arrGet['anime_category'] = 'hero';
+        $category = 'hero';
+        $arrGet['anime_category'] = $category;
         $animeDetails = $this->model->getDetail($arrGet);
         return $animeDetails;
     }
@@ -24,10 +26,6 @@ class AnimeController extends Controller {
     public function watchingGet()
     {
         return "watching" . _EXTENTION_PHP;
-    }
-
-    // public function loginPost()
-    // {
-    //     return _BASE_REDIRECT."/index";
-    // }
+    }    
+    
 }

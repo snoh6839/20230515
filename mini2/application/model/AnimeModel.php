@@ -9,16 +9,16 @@ class AnimeModel extends Model
     {
         $sql =
             " SELECT "
-            ." * "
-            ." FROM "
-            ." anime_data "
-            ." WHERE "
+            . " * "
+            . " FROM "
+            . " anime_data "
+            . " WHERE "
             . " anime_category = :anime_category "
-            ." ORDER BY "
-            ." views "
-            ." DESC ";
-            // ." LIMIT "
-            // ." :limit_num";
+            . " ORDER BY "
+            . " views "
+            . " DESC ";
+        // ." LIMIT "
+        // ." :limit_num";
         $prepare = [
             // ":anime_no" => $arr["anime_no"],
             ":anime_category" => $arr["anime_category"]
@@ -29,8 +29,7 @@ class AnimeModel extends Model
             $result = $stmt->fetchAll();
             return $result; // Return the query results
         } catch (Exception $e) {
-            echo "AnimeModel -> getAnime Error : " . $e->getMessage();
-            exit();
+            throw new Exception("AnimeModel -> getAnime Error: " . $e->getMessage());
         }
     }
 }
