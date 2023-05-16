@@ -38,6 +38,8 @@ CREATE TABLE anime_data (
   views INT NOT NULL
 );
 
+ALTER TABLE anime_data ALTER COLUMN views SET DEFAULT 0;
+
 -- Table follows
 CREATE TABLE follows (
   user_no INT NOT NULL,

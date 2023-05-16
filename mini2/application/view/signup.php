@@ -91,18 +91,22 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="login__form">
-                        <h3>Sign Up <?php echo isset($this->errMsg) ? $this->errMsg : ""; ?> </h3>
+                        <h3>Sign Up <span style="color:#917FB3"><?php echo isset($this->errMsg) ? $this->errMsg : ""; ?></span> </h3>
                         <form action="/user/signup" method="post">
                             <div class="input__item">
-                                <input type="text" placeholder="Id" name="id" id="id" required>
-                                <span class="icon_mail"></span>
-                            </div>
-                            <div class="input__item">
-                                <input type="text" placeholder="Your Name" name="name" id="name" required>
+                                <input type="text" placeholder="Your Name" name="name" id="name" required >
                                 <span class="icon_profile"></span>
                             </div>
                             <div class="input__item">
-                                <input type="text" placeholder="Password" name="pw" id="pw" required>
+                                <input type="text" placeholder="Id 4~12" name="id" id="id" required>
+                                <span class="icon_mail"></span>
+                            </div>
+                            <div class="input__item">
+                                <input type="text" placeholder="Password 8~20" name="pw" id="pw" required>
+                                <span class="icon_lock"></span>
+                            </div>
+                            <div class="input__item">
+                                <input type="text" placeholder="Password Check" name="pwchk" id="pwchk" required>
                                 <span class="icon_lock"></span>
                             </div>
                             <button type="submit" class="site-btn">Sign Up Now</button>

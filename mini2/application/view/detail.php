@@ -129,8 +129,8 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>Scores:</span> 7.31 / 1,515</li>
-                                            <li><span>Rating:</span> 8.5 / 161 times</li>
+                                            <li><span>Score :</span> 7.31 / 1,515</li>
+                                            <li><span>Rating :</span> 8.5 / 161 times</li>
                                             <li><span>Duration:</span> 24 min/ep</li>
                                             <li><span>Quality:</span> HD</li>
                                             <li><span>Views:</span> 131,541</li>

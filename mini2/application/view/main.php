@@ -80,7 +80,7 @@
                             <div class="hero__text">
                                 <h2>바이올렛 애버가든</h2>
                                 <p>편지의 수만큼 이야기가 있다──</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                <a href="#"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                             <div class="hero__text">
                                 <h2>스파이 패밀리</h2>
                                 <p>사람들은 누구나 아무에게도 보여줄 수 없는 자신을 가지고 있다</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                <a href="#"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                             <div class="hero__text">
                                 <h2>진격의 거인</h2>
                                 <p>그날, 인류는 떠올렸다. 놈들에게 지배당해왔던 공포를...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                <a href="#"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
