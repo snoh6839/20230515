@@ -74,17 +74,19 @@
     <section class="hero">
         <div class="container">
             <div class="hero__slider owl-carousel">
-                <div class="hero__items set-bg" data-setbg="/img/hero/hero-2.jpg">
+                <?php foreach ($arrGet as $recode) { ?>
+                <div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $recode["anime_no"] ?>.jpg">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="hero__text">
-                                <h2>바이올렛 애버가든</h2>
-                                <p>편지의 수만큼 이야기가 있다──</p>
-                                <a href="#"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
+                                <h2><?php echo $recode["anime_name"] ?></h2>
+                                <p><?php echo $recode["anime_description"] ?></p>
+                                <a href="/anime/detail.php?anime_no=<?php echo $recode["anime_no"] ?>"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <?php } ?>
                 <div class="hero__items set-bg" data-setbg="/img/hero/hero-1.jpg">
                     <div class="row">
                         <div class="col-lg-6">

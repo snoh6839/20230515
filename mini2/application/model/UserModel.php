@@ -43,7 +43,7 @@ class UserModel extends Model
     {
         $sql =
             " select "
-            . " * "
+            . " user_id "
             . " From "
             . " user_info "
             . " where "

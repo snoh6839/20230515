@@ -80,7 +80,6 @@ class UserController extends Controller {
                             $this->addDynamicProperty("errMsg", $errMsg);
                             return "login" . _EXTENTION_PHP;
                             $this->model->closeConn();
-                            return _BASE_REDIRECT . "/user/login";
                         }
                     }
                 }

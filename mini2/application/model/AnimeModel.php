@@ -13,9 +13,15 @@ class AnimeModel extends Model
         . " From "
         . " anime_data "
         . " where "
-        . " anime_no = :anime_no ";
+        . " anime_no = :anime_no "
+        . " and "
+        . " limit = :limit"
+        . " oder by "
+        . " views "
+        ." DESC ";
         $prepare = [
             ":anime_no" => $arrAnimeData["anime_no"]
+            , ":limit" => $arrAnimeData["limit_num"]
         ];
         try {
             $this->conn->beginTransaction();
