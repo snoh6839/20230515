@@ -1,0 +1,77 @@
+<?php foreach ($arrGet as $recode) { ?>
+<div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $recode["anime_no"] ?>.jpg">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="hero__text">
+                <h2><?php echo $recode["anime_name"] ?></h2>
+                <p><?php echo $recode["anime_description"] ?></p>
+                <a href="/anime/detail.php?anime_no=<?php echo $recode["anime_no"] ?>"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+public function mainGet()
+{
+    $arrGet = $_GET;
+    $limit_num = 3;
+    $this->model->getDetail($arrGet);
+    $arrAnimeData =
+    array(
+        "anime_no" => $arrGet['anime_no'], "limit_num" => $limit_num
+    );
+    return "main" . _EXTENTION_PHP;
+}
+
+class AnimeModel extends Model
+{
+    public function getDetail($arrAnimeData)
+    {
+        $sql =
+        " select "
+        . " * "
+        . " From "
+        . " anime_data "
+        . " where "
+        . " anime_no = :anime_no "
+        . " and "
+        . " limit = :limit"
+        . " oder by "
+        . " views "
+        ." DESC ";
+        $prepare = [
+            ":anime_no" => $arrAnimeData["anime_no"]
+            , ":limit" => $arrAnimeData["limit_num"]
+        ];
+        try {
+            $this->conn->beginTransaction();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($prepare);
+            $result = $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "AnimeModel -> getAnime Error : " . $e->getMessage();
+            exit();
+        }
+    }
+}
+
+( ! ) Warning: Undefined array key "anime_no" in C:\Apache24\htdocs\application\model\AnimeModel.php on line 23
+Call Stack
+#	Time	Memory	Function	Location
+1	0.0005	405056	{main}( )	...\index.php:0
+2	0.0023	414056	application\lib\Application->__construct( )	...\index.php:6
+3	0.0047	430688	application\controller\Controller->__construct( $identityName = 'Anime', $action = 'mainGet' )	...\Application.php:28
+4	0.0169	486216	application\controller\AnimeController->mainGet( )	...\Controller.php:27
+5	0.0169	486216	application\model\AnimeModel->getDetail( $arrAnimeData = ['url' => 'anime/main'] )	...\AnimeController.php:21
+
+( ! ) Warning: Undefined array key "limit_num" in C:\Apache24\htdocs\application\model\AnimeModel.php on line 24
+Call Stack
+#	Time	Memory	Function	Location
+1	0.0005	405056	{main}( )	...\index.php:0
+2	0.0023	414056	application\lib\Application->__construct( )	...\index.php:6
+3	0.0047	430688	application\controller\Controller->__construct( $identityName = 'Anime', $action = 'mainGet' )	...\Application.php:28
+4	0.0169	486216	application\controller\AnimeController->mainGet( )	...\Controller.php:27
+5	0.0169	486216	application\model\AnimeModel->getDetail( $arrAnimeData = ['url' => 'anime/main'] )	...\AnimeController.php:21
+AnimeModel -> getAnime Error : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'limit = ? oder by views DESC' at line 1
+
