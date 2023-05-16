@@ -25,6 +25,7 @@ class AnimeModel extends Model
         ];
         try {
             $stmt = $this->conn->prepare($sql);
+            $stmt->execute($prepare);
             $result = $stmt->fetchAll();
             return $result; // Return the query results
         } catch (Exception $e) {

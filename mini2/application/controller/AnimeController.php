@@ -9,16 +9,12 @@ class AnimeController extends Controller {
 
     public function mainGet()
     {
-        // $arrGet = $_GET;
-        $_GET['anime_category'] = 'hero';
-        $this->model->getDetail($_GET);
-        
-        // // if(isset($_GET['anime_no'])) {
-        // // var_dump($_GET);
-        // // // $anime_no = $arrGet['anime_no'];
-        // $prepare['limit_num'] = 3;
-        // // $limit_num = 3;
-        // // }
+        $arrGet = $_GET;
+        if(!isset($arrGet['anime_category'])){
+            $arrGet['anime_category'] = 'hero'; 
+        }
+        $animeDetails = $this->model->getDetail($_GET);
+        $arrGet['anime_category'] = 'hero';
         return "main" . _EXTENTION_PHP;
     }
 

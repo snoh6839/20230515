@@ -74,8 +74,7 @@
     <section class="hero">
         <div class="container">
             <div class="hero__slider owl-carousel">
-                
-                <?php foreach ($this->model->getDetail($_GET) as $recode) { ?>
+                <?php foreach ($animeDetails as $recode) { ?>
                     <div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $recode["anime_no"] ?>.jpg">
                         <div class="row">
                             <div class="col-lg-6">
