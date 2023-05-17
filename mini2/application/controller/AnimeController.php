@@ -60,6 +60,13 @@ class AnimeController extends Controller
     $animeDetails = $this->model->getDetail($arrGet, 1);
     return $animeDetails;
 }
+    
+    public function addViews($animeNo)
+{
+    $arrUpdate = array("anime_no" => $animeNo);
+    $this->model->addViews($arrUpdate);
+}
+
 
 
     public function watchingGet()
