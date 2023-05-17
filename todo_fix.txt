@@ -86,3 +86,46 @@ $data = array(
 
 //뷰 출력 예시
 <h3>Login <?php echo isset($this->errMsg) ? $this->errMsg : " : You Need to Login"; ?></h3>
+
+
+
+// 수정 아이디어
+
+protected function addDynamicProperty($key, $val)
+{
+    $this->$key = $val;
+}
+
+public function animeHeroDetailsGet($category)
+{
+    $arrGet = $_GET;
+    $arrGet['anime_category'] = $category;
+    $animeDetails = $this->model->getDetail($arrGet);
+    return $animeDetails;
+}
+
+// 뷰에서 출력할 때 카테고리 값을 사용합니다.
+$category = 'hero';
+$this->addDynamicProperty("animeDetails", $this->animeHeroDetailsGet($category));
+
+// 뷰 출력 예시
+<section class="hero">
+    <div class="container">
+        <div class="hero__slider owl-carousel">
+            <?php foreach ($this->animeDetails as $record) { ?>
+                <div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $record["anime_no"] ?>.jpg">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                <h2><?php echo $record["anime_name"] ?></h2>
+                                <p><?php echo $record["anime_description"] ?></p>
+                                <a href="/anime/detail?anime_no=<?php echo $record["anime_no"] ?>"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</section>
+
