@@ -19,6 +19,7 @@ class AnimeModel extends Model
             . " DESC ";
         // ." LIMIT "
         // ." :limit_num";
+        
         $prepare = [
             // ":anime_no" => $arr["anime_no"],
             ":anime_category" => $arr["anime_category"]

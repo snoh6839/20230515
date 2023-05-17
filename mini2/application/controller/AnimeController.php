@@ -14,7 +14,7 @@ class AnimeController extends Controller
         return "main" . _EXTENTION_PHP;
     }
 
-    public function animeDetailsGet()
+    public function animeHeroDetailsGet()
     {
         $arrGet = $_GET;
         $category = 'hero';
