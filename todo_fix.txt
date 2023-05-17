@@ -1,9 +1,15 @@
-<?php
+// todo = 고치기
+// 현재 컨트롤러에서 카테고리 변수를 직접 지정해 주고
+public function animeHeroDetailsGet()
+    {
+        $arrGet = $_GET;
+        $category = 'hero';
+        $arrGet['anime_category'] = $category;
+        $animeDetails = $this->model->getDetail($arrGet);
+        return $animeDetails;
+    }
 
-namespace application\model;
-
-use Exception;
-
+// 아래 모델을 불러와서 
 class AnimeModel extends Model
 {
     public function getDetail($arr)
@@ -20,6 +26,7 @@ class AnimeModel extends Model
             . " DESC ";
         // ." LIMIT "
         // ." :limit_num";
+        
         $prepare = [
             // ":anime_no" => $arr["anime_no"],
             ":anime_category" => $arr["anime_category"]
@@ -34,54 +41,48 @@ class AnimeModel extends Model
         }
     }
 }
-<?php
 
-namespace application\controller;
-
-use application\model\AnimeModel;
-
-class AnimeController extends Controller
-{
-    private $animeModel;
-
-    public function __construct()
-    {
-        $this->animeModel = new AnimeModel();
-    }
-
-    public function detailGet()
-    {
-        return "detail" . _EXTENTION_PHP;
-    }
-
-    public function mainGet()
-    {
-        return "main" . _EXTENTION_PHP;
-    }
-
-    public function animeDetailsGet()
-    {
-        $arrGet = $_GET;
-        $arrGet['anime_category'] = 'hero';
-        $animeDetails = $this->animeModel->getDetail($arrGet);
-        return $animeDetails;
-    }
-
-    public function watchingGet()
-    {
-        return "watching" . _EXTENTION_PHP;
-    }
-}
-<?php foreach ($this->animeDetailsGet() as $record) { ?>
-    <div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $record["anime_no"] ?>.jpg">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="hero__text">
-                    <h2><?php echo $record["anime_name"] ?></h2>
-                    <p><?php echo $record["anime_description"] ?></p>
-                    <a href="/anime/detail.php?anime_no=<?php echo $record["anime_no"] ?>"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
-                </div>
+//뷰에서 아래와 같이 출력하고 있는데
+<section class="hero">
+        <div class="container">
+            <div class="hero__slider owl-carousel">
+                <?php foreach ($this->animeHeroDetailsGet() as $record) { ?>
+                    <div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $record["anime_no"] ?>.jpg">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="hero__text">
+                                    <h2><?php echo $record["anime_name"] ?></h2>
+                                    <p><?php echo $record["anime_description"] ?></p>
+                                    <a href="/anime/detail?anime_no=<?php echo $record["anime_no"] ?>"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
         </div>
-    </div>
-<?php } ?>
+    </section>
+
+//컨트롤러에서 addDynamicProperty 를 사용하여 뷰에서 카테고리를 받아와서 넣고
+// 출력도 그냥 컨트롤러에서 제어하고 뷰에서는 불러오기만 하는 형식으로 고쳐야함
+
+//addDynamicProperty
+protected function addDynamicProperty($key, $val)
+    {
+        $this->$key = $val;
+    }
+
+//컨트롤러 예시
+$data = array(
+            'id' => $arrPost['id']
+            , 'pw' => $arrPost['pw']
+            , 'name' => $arrPost['name']
+        );
+        $this->model->setUser($data);
+        $errMsg = ": Successfully Signed Up. Please Login.";
+        $this->addDynamicProperty("errMsg", $errMsg);
+        return "login" . _EXTENTION_PHP;
+        $this->model->closeConn();
+
+//뷰 출력 예시
+<h3>Login <?php echo isset($this->errMsg) ? $this->errMsg : " : You Need to Login"; ?></h3>
