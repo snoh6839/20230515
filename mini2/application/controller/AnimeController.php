@@ -54,13 +54,13 @@ class AnimeController extends Controller
         return $animeDetails;
     }
 
-    public function animeDetailsGet()
-    {
-        $arrGet = $_GET;
-        $arrGet["anime_no"] = 1;        
-        $animeDetails = $this->model->getDetail($arrGet, 1);
-        return $animeDetails;
-    }
+    public function animeDetailsGet($animeNo)
+{
+    $arrGet = array("anime_no" => $animeNo);
+    $animeDetails = $this->model->getDetail($arrGet, 1);
+    return $animeDetails;
+}
+
 
     public function watchingGet()
     {
