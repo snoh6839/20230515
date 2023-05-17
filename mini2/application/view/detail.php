@@ -90,50 +90,48 @@
         <div class="container">
             <div class="anime__details__content">
                 <div class="row">
-                    <div class="col-lg-3">
-                        <div class="anime__details__pic set-bg" data-setbg="/img/anime/details-pic.jpg">
-                            <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="anime__details__text">
-                            <div class="anime__details__title">
-                                <h3>바이올렛 애버가든: 영원과 자동수기 인형</h3>
+                    <?php foreach ($this->animeDetails as $record) { ?>
+                        <div class="col-lg-3">
+                            <div class="anime__details__pic set-bg" style="background-position: left;" data-setbg="/img/sidebar/<?php echo $record["anime_category"] ?>-<?php echo $record["anime_no"] ?>.jpg">
+                                <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                <div class="view"><i class="fa fa-eye"></i> <?php echo $record["views"] ?></div>
                             </div>
-                            <p>
-                                "고객님이 원하시면 어디든지 달려가겠습니다.
-                                자동 수기인형 서비스, 바이올렛 에버가든입니다."
-                                바이올렛 에버가든이라는 소녀와의 만남이 끊어져 버릴 뻔한 두 사람의 미래를 이어 나간다.
-                                삶에 절망하던 소녀가 "영원"을 찾는 이야기.</p>
-                            <div class="anime__details__widget">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6">
-                                        <ul>
-                                            <li><span>Type:</span> TV Series</li>
-                                            <li><span>Studios:</span> Lerche</li>
-                                            <li><span>Date aired:</span> Oct 02, 2019 to ?</li>
-                                            <li><span>Status:</span> Airing</li>
-                                            <li><span>Genre:</span> Action, Adventure, Fantasy, Magic</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <ul>
-                                            <li><span>Score :</span> 7.31 / 1,515</li>
-                                            <li><span>Rating :</span> 8.5 / 161 times</li>
-                                            <li><span>Duration:</span> 24 min/ep</li>
-                                            <li><span>Quality:</span> HD</li>
-                                            <li><span>Views:</span> 131,541</li>
-                                        </ul>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="anime__details__text">
+                                <div class="anime__details__title">
+                                    <h3><?php echo $record["anime_name"] ?></h3>
+                                </div>
+                                <p>
+                                    <?php echo $record["anime_description"] ?></p>
+                                <div class="anime__details__widget">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <ul>
+                                                <li><span>Type:</span> <?php echo $record["anime_type"] ?></li>
+                                                <li><span>Studios:</span> <?php echo $record["anime_studios"] ?></li>
+                                                <li><span>Date aired:</span> <?php echo $record["anime_date"] ?></li>
+                                                <li><span>Status:</span> <?php echo $record["anime_status"] ?></li>
+                                                <li><span>Genre:</span> <?php echo $record["anime_genre"] ?></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <ul>
+                                                <li><span>Score :</span> <?php echo $record["anime_scores"] ?> / 10</li>
+                                                <li><span>Rating :</span> <?php echo $record["anime_rating"] ?> / 10</li>
+                                                <li><span>Duration:</span> <?php echo $record["anime_duration"] ?> min/ep</li>
+                                                <li><span>Quality:</span> <?php echo $record["anime_quality"] ?></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="anime__details__btn">
-                                <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
-                                <a href="#" class="watch-btn"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                <div class="anime__details__btn">
+                                    <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
+                                    <a href="#" class="watch-btn"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
             <div class="row">
@@ -214,26 +212,12 @@
                         <div class="section-title">
                             <h5>you might like...</h5>
                         </div>
-                        <div class="product__sidebar__view__item set-bg" data-setbg="/img/sidebar/tv-1.jpg">
-                            <div class="ep">18 / ?</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                            <h5><a href="#">Boruto: Naruto next generations</a></h5>
-                        </div>
-                        <div class="product__sidebar__view__item set-bg" data-setbg="/img/sidebar/tv-2.jpg">
-                            <div class="ep">18 / ?</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                            <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                        </div>
-                        <div class="product__sidebar__view__item set-bg" data-setbg="/img/sidebar/tv-3.jpg">
-                            <div class="ep">18 / ?</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                            <h5><a href="#">Sword art online alicization war of underworld</a></h5>
-                        </div>
-                        <div class="product__sidebar__view__item set-bg" data-setbg="/img/sidebar/tv-4.jpg">
-                            <div class="ep">18 / ?</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                            <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
-                        </div>
+                        <?php foreach ($this->animeDetails5 as $record) { ?>
+                            <div class="product__sidebar__view__item set-bg mix" data-setbg="/img/sidebar/<?php echo $record["anime_category"] ?>-<?php echo $record["anime_no"] ?>.jpg">
+                                <div class="view"><i class="fa fa-eye"></i><?php echo $record["views"] ?></div>
+                                <h5><a href="/anime/detail?anime_no=<?php echo $record["anime_no"] ?>"><?php echo $record["anime_name"] ?></a></h5>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
