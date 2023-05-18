@@ -10,6 +10,11 @@ class AnimeController extends Controller
         $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
         $limit = 4;
         $this->addDynamicProperty("animeDetails5", $this->animeLimitDetailsGet($limit));
+        if (isset($_GET['anime_no'])) {
+            $animeNo = $_GET['anime_no'];
+            $this->addViews($animeNo); // 조회수 증가
+            $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
+        }
         return "detail" . _EXTENTION_PHP;
     }
 
@@ -29,11 +34,7 @@ class AnimeController extends Controller
         $this->addDynamicProperty("animeDetails4", $this->animeCateDetailsGet($category, $limit));
         $this->addDynamicProperty("animeDetails5", $this->animeLimitDetailsGet($limit));
         
-        if (isset($_GET['anime_no'])) {
-        $animeNo = $_GET['anime_no'];
-        $this->addViews($animeNo); // 조회수 증가
-        $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
-    }
+        
         return "main" . _EXTENTION_PHP;
     }
 
