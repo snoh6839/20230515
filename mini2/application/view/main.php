@@ -111,7 +111,7 @@
                                     <div class="product__item">
                                         <div class="product__item__pic set-bg" data-setbg="/img/trending/trend-<?php echo $record["anime_no"] ?>.jpg">
 
-                                            <div class="comment"><i class="fa fa-comments"></i><?php echo $this->animeCommentCount ?></div>
+
                                             <div class="view"><i class="fa fa-eye"></i><?php echo $record["views"] ?></div>
                                         </div>
                                         <div class="product__item__text">
@@ -136,7 +136,7 @@
                                     <div class="product__item">
                                         <div class="product__item__pic set-bg" data-setbg="/img/popular/popular-<?php echo $record["anime_no"] ?>.jpg">
 
-                                            <div class="comment"><i class="fa fa-comments"></i><?php echo $this->animeCommentCount ?></div>
+
                                             <div class="view"><i class="fa fa-eye"></i><?php echo $record["views"] ?></div>
                                         </div>
                                         <div class="product__item__text">
@@ -161,7 +161,7 @@
                                     <div class="product__item">
                                         <div class="product__item__pic set-bg" data-setbg="/img/recent/recent-<?php echo $record["anime_no"] ?>.jpg">
 
-                                            <div class="comment"><i class="fa fa-comments"></i><?php echo $this->animeCommentCount ?></div>
+
                                             <div class="view"><i class="fa fa-eye"></i><?php echo $record["views"] ?></div>
                                         </div>
                                         <div class="product__item__text">
@@ -193,42 +193,17 @@
                             <div class="section-title">
                                 <h5>New Comment</h5>
                             </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    </img src="/img/sidebar/comment-1.jpg" alt="">
+                            <?php foreach ($this->animeCommentMain as $record) { ?>
+                                <div class="product__sidebar__comment__item">
+                                    <div class="product__sidebar__comment__item__text">
+                                        <h5><a href="/anime/detail?anime_no=<?php echo $record["anime_no"] ?>"><?php echo $record["comment_content"] ?> - <?php echo $record["user_name"] ?> </a></h5>
+                                        <span>
+                                            < <?php echo $record["anime_name"] ?>> <?php echo $record["comment_date"] ?>
+                                        </span>
+
+                                    </div>
                                 </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    </img src="/img/sidebar/comment-2.jpg" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    </img src="/img/sidebar/comment-3.jpg" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <h5><a href="#">Kizumonogatari III: Reiket su-hen</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    </img src="/img/sidebar/comment-4.jpg" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <h5><a href="#">Monogatari Series: Second Season</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

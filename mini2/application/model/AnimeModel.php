@@ -94,33 +94,59 @@ class AnimeModel extends Model
     }
 
 
-    public function getComment($arr)
+    public function getComment($arr, $cateFlag )
     {
-        $sql =
-        " SELECT "
-        ." adata.anime_name "
-        ." , adata.views "
-        ." , uinfo.user_name "
-        ." , ucomment.comment_content"
-        ." , ucomment.comment_date "
-        ." FROM "
-        ." user_comment AS ucomment "
-        ." INNER JOIN anime_data AS adata "
-        ." ON ucomment.anime_no = adata.anime_no "
-        ." INNER JOIN user_info AS uinfo "
-        ." ON ucomment.user_no = uinfo.user_no "
-        ." WHERE "
-        . " ucomment.anime_no =  :anime_no"
-        ." ORDER BY "
-        ." ucomment.comment_date "
-        ." DESC"
-        . " LIMIT "
-        . " :limit_num";
+        if($cateFlag === 1){
+            $sql =
+            " SELECT "
+            ." adata.anime_name "
+            ." , adata.views "
+            ." , uinfo.user_name "
+            ." , ucomment.comment_content"
+            ." , ucomment.comment_date "
+            ." FROM "
+            ." user_comment AS ucomment "
+            ." INNER JOIN anime_data AS adata "
+            ." ON ucomment.anime_no = adata.anime_no "
+            ." INNER JOIN user_info AS uinfo "
+            ." ON ucomment.user_no = uinfo.user_no "
+            ." WHERE "
+            . " ucomment.anime_no =  :anime_no"
+            ." ORDER BY "
+            ." ucomment.comment_date "
+            ." DESC"
+            . " LIMIT "
+            . " :limit_num";
+    
+            $prepare = [
+                ":limit_num" => $arr["limit_num"]
+                , ":anime_no" => $arr["anime_no"]
+            ];
+        } else if ($cateFlag === 2) {
+            $sql =
+            " SELECT "
+            . " adata.anime_no "
+            . " , adata.anime_name "
+            . " , adata.views "
+            . " , uinfo.user_name "
+            . " , ucomment.comment_content"
+            . " , ucomment.comment_date "
+            . " FROM "
+            . " user_comment AS ucomment "
+            . " INNER JOIN anime_data AS adata "
+            . " ON ucomment.anime_no = adata.anime_no "
+            . " INNER JOIN user_info AS uinfo "
+            . " ON ucomment.user_no = uinfo.user_no "
+            . " ORDER BY "
+            . " ucomment.comment_date "
+            . " DESC"
+            . " LIMIT "
+            . " :limit_num";
 
-        $prepare = [
-            ":limit_num" => $arr["limit_num"]
-            , ":anime_no" => $arr["anime_no"]
-        ];
+            $prepare = [
+                ":limit_num" => $arr["limit_num"]
+            ];
+        }
 
         try {
             $stmt = $this->conn->prepare($sql);

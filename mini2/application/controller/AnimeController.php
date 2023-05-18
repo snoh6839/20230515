@@ -66,13 +66,7 @@ class AnimeController extends Controller
         $category = 'recent';
         $this->addDynamicProperty("animeDetails4", $this->animeCateDetailsGet($category, $limit));
         $this->addDynamicProperty("animeDetails5", $this->animeLimitDetailsGet($limit));
-
-        $animeNo = 1;
-        $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
-        if (isset($_GET['anime_no'])) {
-            $animeNo = $_GET['anime_no'];
-            $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
-        }
+        $this->addDynamicProperty("animeCommentMain", $this->animeCommentMainGet($limit));
         
         return "main" . _EXTENTION_PHP;
     }
@@ -111,9 +105,17 @@ class AnimeController extends Controller
     {
         
         $arrGet = array("anime_no" => $animeNo, "limit_num" => $limit);
-        $animeComment = $this->model->getComment($arrGet);
+        $animeComment = $this->model->getComment($arrGet, 1);
         return $animeComment;
         
+    }
+
+    public function animeCommentMainGet($limit)
+    {
+
+        $arrGet = array("limit_num" => $limit);
+        $animeCommentMain = $this->model->getComment($arrGet, 2);
+        return $animeCommentMain;
     }
 
     public function animeCommentCountGet($animeNo)

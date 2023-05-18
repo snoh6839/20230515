@@ -102,11 +102,11 @@
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">
-                                <input type="text" placeholder="Password 8~20" name="pw" id="pw" required>
+                                <input type="Password" placeholder="Password 8~20" name="pw" id="pw" required>
                                 <span class="icon_lock"></span>
                             </div>
                             <div class="input__item">
-                                <input type="text" placeholder="Password Check" name="pwchk" id="pwchk" required>
+                                <input type="Password" placeholder="Password Check" name="pwchk" id="pwchk" required>
                                 <span class="icon_lock"></span>
                             </div>
                             <button type="submit" class="site-btn">Sign Up Now</button>
