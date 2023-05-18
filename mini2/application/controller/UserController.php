@@ -24,7 +24,7 @@ class UserController extends Controller {
     {
         session_unset();
         session_destroy();
-        return "main" . _EXTENTION_PHP;
+        return _BASE_REDIRECT."/anime/main";
     }
 
     public function signupGet()

@@ -38,7 +38,14 @@ class AnimeController extends Controller
         $this->model->addComment($data);
         return _BASE_REDIRECT . "/anime/detail?anime_no=". $animeNo;
     }
-    
+
+    public function logoutGet()
+    {
+        $this->model = $this->getModel("User");
+        session_unset();
+        session_destroy();
+        return _BASE_REDIRECT."/anime/main";
+    }
 
 
 
