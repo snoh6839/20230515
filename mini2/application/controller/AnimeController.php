@@ -68,6 +68,15 @@ class AnimeController extends Controller
     $this->model->addViews($arrUpdate);
 }
 
+    public function addComment($animeNo, $user_no, $comment_content)
+    {
+        $arrUpdate = array(
+            "anime_no" => $animeNo
+            , "user_no" => $user_no
+            , "comment_content" => $comment_content);
+        $this->model->addComment($arrUpdate);
+    }
+
 
 
     public function watchingGet()
