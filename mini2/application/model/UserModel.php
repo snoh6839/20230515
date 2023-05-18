@@ -141,6 +141,40 @@ class UserModel extends Model
         }
     }
 
-    
+    public function updateUser($data)
+    {
+        // var_dump($data, $this->conn);
+        $sql =
+            " UPDATE "
+            . " user_info "
+            . " SET "
+            . " user_id  =  :id "
+            . " , "
+            . " user_pw  =  :pw "
+            . " , "
+            . " user_name  =  :name "
+            ." WHERE "
+            . " user_id  =  :origin_id "
+            ;
+
+        $prepare = [
+            ":id" => $data["id"]
+            , ":pw" => $data["pw"]
+            , ":name" => $data["name"]
+            , " :origin_id " => $data["origin_id"]
+        ];
+        try {
+            // $this->conn->beginTransaction();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($prepare);
+            $this->conn->commit();
+        } catch (Exception $e) {
+            // $this->conn->rollBack();
+            echo "UserModel -> getUser Error : " . $e->getMessage();
+            exit();
+        } finally {
+            $this->closeConn();
+        }
+    }
 }
 ?>

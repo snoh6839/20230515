@@ -24,8 +24,7 @@
 </head>
 
 <body>
-    <?php echo !isset($_SESSION['chk_flg']) ? "<script>window.location.href = '/user/pwchk';</script>" : "" ?>
-    <?php echo isset($this->successFlg) ? "<script>window.location.href = '/user/main';</script>" : "" ?>
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -94,9 +93,8 @@
                 <div class="col-lg-6">
 
                     <div class="login__form">
-                        <h3>Sign Up <span style="color:#917FB3"><?php echo isset($this->errMsg) ? $this->errMsg : ""; ?></span> </h3>
-
-                        <form id="editForm" action="/user/setting" method="post" onsubmit="return false">
+                        <h3>Chang Account Setting <span style="color:#917FB3"><?php echo isset($this->errMsg) ? $this->errMsg : ""; ?></span> </h3>
+                        <form action="/user/setting" method="post">
                             <div class="input__item">
                                 <input type="text" placeholder="Your Name" name="name" id="name" required>
                                 <span class="icon_profile"></span>
@@ -113,9 +111,9 @@
                                 <input type="Password" placeholder="Password Check" name="pwchk" id="pwchk" required>
                                 <span class="icon_lock"></span>
                             </div>
-                            <button type="submit" class="site-btn">Sign Up Now</button>
+                            <button type="submit" class="site-btn">Chang Account</button>
                         </form>
-                        <h5>Already have an account? <a href="/user/login">Log In!</a></h5>
+                        <!-- <h5>Already have an account? <a href="/user/login">Log In!</a></h5> -->
                     </div>
                 </div>
                 <div class="col-lg-6">
