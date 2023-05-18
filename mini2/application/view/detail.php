@@ -93,7 +93,7 @@
                     <?php foreach ($this->animeDetails as $record) { ?>
                         <div class="col-lg-3">
                             <div class="anime__details__pic set-bg" style="background-position: left;" data-setbg="/img/sidebar/<?php echo $record["anime_category"] ?>-<?php echo $record["anime_no"] ?>.jpg">
-                                <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                <div class="comment"><i class="fa fa-comments"></i> <?php echo $this->animeCommentCount ?></div>
                                 <div class="view"><i class="fa fa-eye"></i> <?php echo $record["views"] ?></div>
                             </div>
                         </div>

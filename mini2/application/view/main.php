@@ -111,7 +111,7 @@
                                     <div class="product__item">
                                         <div class="product__item__pic set-bg" data-setbg="/img/trending/trend-<?php echo $record["anime_no"] ?>.jpg">
 
-                                            <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                            <div class="comment"><i class="fa fa-comments"></i><?php echo $this->animeCommentCount ?></div>
                                             <div class="view"><i class="fa fa-eye"></i><?php echo $record["views"] ?></div>
                                         </div>
                                         <div class="product__item__text">
@@ -136,7 +136,7 @@
                                     <div class="product__item">
                                         <div class="product__item__pic set-bg" data-setbg="/img/popular/popular-<?php echo $record["anime_no"] ?>.jpg">
 
-                                            <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                            <div class="comment"><i class="fa fa-comments"></i><?php echo $this->animeCommentCount ?></div>
                                             <div class="view"><i class="fa fa-eye"></i><?php echo $record["views"] ?></div>
                                         </div>
                                         <div class="product__item__text">
@@ -161,7 +161,7 @@
                                     <div class="product__item">
                                         <div class="product__item__pic set-bg" data-setbg="/img/recent/recent-<?php echo $record["anime_no"] ?>.jpg">
 
-                                            <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                            <div class="comment"><i class="fa fa-comments"></i><?php echo $this->animeCommentCount ?></div>
                                             <div class="view"><i class="fa fa-eye"></i><?php echo $record["views"] ?></div>
                                         </div>
                                         <div class="product__item__text">
