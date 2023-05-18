@@ -6,8 +6,8 @@ class AnimeController extends Controller
 
     public function detailGet()
     {
-        
-        $this->addDynamicProperty("animeDetails", $this->animeDetailsGet());
+        $animeNo = 1;
+        $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
         $limit = 4;
         $this->addDynamicProperty("animeDetails5", $this->animeLimitDetailsGet($limit));
         return "detail" . _EXTENTION_PHP;
