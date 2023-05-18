@@ -7,7 +7,7 @@
     <meta name="keywords" content="Anime, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Anime | login</title>
+    <title>Anime | setting</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -24,6 +24,8 @@
 </head>
 
 <body>
+    <?php echo !isset($_SESSION['chk_flg']) ? "<script>window.location.href = '/user/pwchk';</script>" : "" ?>
+    <?php echo isset($this->successFlg) ? "<script>window.location.href = '/user/main';</script>" : "" ?>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -58,7 +60,7 @@
                                 </script> -->
                                 <?php } else { ?>
                                     <li><a href="/user/signup">Sign Up</a></li>
-                                    <li class="active"><a href="/user/login">Login</a></li>
+                                    <li><a href="/user/login">Login</a></li>
                                 <?php } ?>
                             </ul>
                         </nav>
@@ -85,45 +87,55 @@
     </div>
     <!-- Breadcrumb End -->
 
-    <!-- Login Section Begin -->
-    <br>
-    <br>
-    <br>
-    <br>
-    <section class="login spad">
+    <!-- Signup Section Begin -->
+    <section class="signup spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
+
                     <div class="login__form">
-                        <h3>Login <?php echo isset($this->errMsg) ? $this->errMsg : " : You Need to Login"; ?></h3>
-                        <form action="/user/login" method="post">
+                        <h3>Sign Up <span style="color:#917FB3"><?php echo isset($this->errMsg) ? $this->errMsg : ""; ?></span> </h3>
+
+                        <form id="editForm" action="/user/setting" method="post" onsubmit="return false">
                             <div class="input__item">
-                                <input type="text" placeholder="ID" name="id" id="id" required>
+                                <input type="text" placeholder="Your Name" name="name" id="name" required>
+                                <span class="icon_profile"></span>
+                            </div>
+                            <div class="input__item">
+                                <input type="text" placeholder="Id 4~12" name="id" id="id" required>
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">
-                                <input type="Password" placeholder="Password" name="pw" id="pw" required>
+                                <input type="Password" placeholder="Password 8~20" name="pw" id="pw" required>
                                 <span class="icon_lock"></span>
                             </div>
-                            <button type="submit" class="site-btn">Login Now</button>
+                            <div class="input__item">
+                                <input type="Password" placeholder="Password Check" name="pwchk" id="pwchk" required>
+                                <span class="icon_lock"></span>
+                            </div>
+                            <button type="submit" class="site-btn">Sign Up Now</button>
                         </form>
-                        <a href="#" class="forget_pass">Forgot Your Password?</a>
+                        <h5>Already have an account? <a href="/user/login">Log In!</a></h5>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="login__register">
-                        <h3>Dont’t Have An Account?</h3>
-                        <a href="/user/signup" class="primary-btn">Signup Now</a>
+                    <div class="login__social__links">
+                        <h3>Today's Recommendation:</h3>
+                        <div id="recom" class="hidden">
+                            <div class="recom-img">
+                                <img>
+                            </div>
+                            <br>
+                            <button type="button" class="recom-btn site-btn">
+                                다른 추천 보기[click]
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <br>
-            <br>
-            <br>
-            <br>
         </div>
     </section>
-    <!-- Login Section End -->
+    <!-- Signup Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer">

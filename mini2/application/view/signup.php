@@ -36,7 +36,7 @@
                 <div class="col-lg-2">
                     <div class="header__logo">
                         <a href="/anime/main">
-                            </ /img src="//img/logo.png" alt="">
+                            <img src="/img/logo.png" style="height: 24px;" alt="">
                         </a>
                     </div>
                 </div>
@@ -46,10 +46,10 @@
                             <ul>
                                 <li><a href="/anime/main">Anime Home</a></li>
                                 <li><a href="/anime/detail">Anime Details</a></li>
-                                <li><a href="/anime/watching">Anime Watching</a></li>
-                                <!-- <li class="active"><a href="/user/signup">Sign Up</a></li> -->
+                                <!-- <li><a href="/anime/watching">Anime Watching</a></li> -->
                                 <?php if (isset($_SESSION[_STR_LOGIN_ID])) { ?>
                                     <li><a href="/user/logout">Logout</a></li>
+                                    <li><a href="/user/setting">Account setting</a></li>
                                     <!-- <button id="logout" onclick="redirectLogout();">Logout</button>
                                 <script>
                                     function redirectLogout() {
@@ -94,7 +94,7 @@
                         <h3>Sign Up <span style="color:#917FB3"><?php echo isset($this->errMsg) ? $this->errMsg : ""; ?></span> </h3>
                         <form action="/user/signup" method="post">
                             <div class="input__item">
-                                <input type="text" placeholder="Your Name" name="name" id="name" required >
+                                <input type="text" placeholder="Your Name" name="name" id="name" required>
                                 <span class="icon_profile"></span>
                             </div>
                             <div class="input__item">
