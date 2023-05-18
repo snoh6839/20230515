@@ -129,3 +129,19 @@ $this->addDynamicProperty("animeDetails", $this->animeHeroDetailsGet($category))
     </div>
 </section>
 
+
+
+
+
+
+// 기존 정보 출력
+    if (!empty($existingUserInfo)) {
+        ?>
+        <h2>기존 정보</h2>
+        <p>사용자 ID: <?php echo $existingUserInfo[0]['user_id']; ?></p>
+        <p>사용자 이름: <?php echo $existingUserInfo[0]['user_name']; ?></p>
+        <hr>
+        <?php
+    }
+    ?>
+
