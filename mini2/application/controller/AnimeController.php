@@ -3,7 +3,6 @@ namespace application\controller;
 
 class AnimeController extends Controller
 {
-
     public function detailGet()
     {
         $animeNo = 1;
@@ -18,9 +17,28 @@ class AnimeController extends Controller
             $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
             $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
         }
+
         
         return "detail" . _EXTENTION_PHP;
     }
+
+    public function detailPost()
+    {
+        $arrPost = $_POST;
+        $animeNo = $arrPost["anime_no"];
+        $userId = $_SESSION[_STR_LOGIN_ID];
+        $commentCont = $arrPost["comment_content"];
+        
+
+        $data = array(
+            'anime_no' => $animeNo,
+            'id' => $userId,
+            'comment_content' => $commentCont
+        );
+        $this->model->addComment($data);
+        return _BASE_REDIRECT . "/anime/detail?anime_no=". $animeNo;
+    }
+    
 
 
 

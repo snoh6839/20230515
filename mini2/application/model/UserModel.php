@@ -69,6 +69,36 @@ class UserModel extends Model
         return $result;
     }
 
+    public function getUserNo($arrUserInfo)
+    {
+        $sql =
+            " select "
+            . " user_no "
+            . " From "
+            . " user_info "
+            . " where "
+            . " user_id = :id ";
+
+        $prepare = [
+            ":id" => $arrUserInfo["id"]
+        ];
+        try {
+            $this->conn->beginTransaction();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($prepare);
+            $result = $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "UserModel -> getUser Error : " . $e->getMessage();
+            exit();
+        }
+
+        // finally {
+        //     $this->closeConn();
+        // }
+
+        return $result;
+    }
+
     public function setUser($data)
     {
         // var_dump($data, $this->conn);

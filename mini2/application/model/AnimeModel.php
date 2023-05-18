@@ -132,4 +132,73 @@ class AnimeModel extends Model
             
         }
     }
+
+    public function commentCount($arr)
+    {
+        $sql =
+        " SELECT "
+        . " * "
+        . " FROM "
+        . " user_comment"
+        . " WHERE "
+        . " anime_no =  :anime_no"
+        ;
+
+        $prepare = [
+            ":anime_no" => $arr["anime_no"]
+        ];
+
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($prepare);
+            $result = $stmt->rowCount();
+            return $result;
+        } catch (Exception $e) {
+            throw new Exception("AnimeModel -> getAnime Error: " . $e->getMessage());
+        }
+    }
+
+    public function addComment($arr)
+    {
+        $sql = 
+        " INSERT INTO "
+        ." user_comment "
+        ." ( "
+        ." user_no "
+        ." ,comment_content "
+        ." ,anime_no "
+        ." ) "
+
+        ." VALUES ( " 
+        ." ( "
+        ." SELECT "
+        ." user_no "
+        ." FROM "
+        ." user_info "
+        ." WHERE "
+        ." user_id = :id "
+        ." ) "
+        . " ,:comment_content "
+        . " ,:anime_no "
+        ." ) "
+        ;
+        // prepare로 데이터들의 배열을 입력
+        $prepare = [
+            ":anime_no" => $arr["anime_no"]
+            , ":id" => $arr["id"]
+            , ":comment_content" => $arr["comment_content"]
+        ];
+        try {
+            $this->conn->beginTransaction();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($prepare);
+            $this->conn->commit();
+        } catch (Exception $e) {
+            $this->conn->rollBack();
+            echo "UserModel -> getUser Error : " . $e->getMessage();
+            exit();
+        } finally {
+            $this->closeConn();
+        }
+    }
 }

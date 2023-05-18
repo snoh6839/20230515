@@ -153,8 +153,10 @@
                         <div class="section-title">
                             <h5>Your Comment</h5>
                         </div>
-                        <form action="#">
-                            <textarea placeholder="Your Comment"></textarea>
+                        <form action="/anime/detail" method="post">
+                            <input type="hidden" name="anime_no" value="<?php echo isset($_GET["anime_no"]) ? $_GET["anime_no"] : 1;  ?>">
+                            <!-- <input type="hidden" name="user_no" value="<?php echo isset($_GET["user_no"]) ? $_GET["user_no"] : 1;  ?>"> -->
+                            <textarea placeholder="Your Comment" name="comment_content"></textarea>
                             <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
                         </form>
                     </div>
