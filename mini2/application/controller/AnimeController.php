@@ -18,6 +18,7 @@ class AnimeController extends Controller
             $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
             $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
         }
+        
         return "detail" . _EXTENTION_PHP;
     }
 
@@ -73,11 +74,11 @@ class AnimeController extends Controller
 
     public function animeCommentGet($animeNo , $limit)
     {
-        $arrGet = $_GET;
-        $arrGet['anime_no'] = $animeNo;
-        $arrGet['limit_num'] = $limit;
+        
+        $arrGet = array("anime_no" => $animeNo, "limit_num" => $limit);
         $animeComment = $this->model->getComment($arrGet);
         return $animeComment;
+        
     }
 
 

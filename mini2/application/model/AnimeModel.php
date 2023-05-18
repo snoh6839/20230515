@@ -125,11 +125,11 @@ class AnimeModel extends Model
         try {
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($prepare);
-            $result = $stmt->rowCount();
-            $this->conn->commit();
+            $result = $stmt->fetchAll();
+            return $result;
         } catch (Exception $e) {
             throw new Exception("AnimeModel -> getAnime Error: " . $e->getMessage());
-            $this->conn->rollback();
+            
         }
     }
 }
