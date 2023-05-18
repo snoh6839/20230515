@@ -29,11 +29,15 @@ class UserController extends Controller {
 
     public function signupGet()
     {
+        // Get the existing user information
+    $existingUserInfo = $this->model->getUser(["id" => $data["origin_id"], "pw" => $data["pw"]]);
         return "signup" . _EXTENTION_PHP;
     }
 
     public function settingGet()
     {
+        // Get the existing user information
+    $existingUserInfo = $this->model->getUser(["id" => $data["origin_id"], "pw" => $data["pw"]]);
         return "setting" . _EXTENTION_PHP;
     }
 
