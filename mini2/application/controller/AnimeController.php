@@ -10,10 +10,13 @@ class AnimeController extends Controller
         $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
         $limit = 4;
         $this->addDynamicProperty("animeDetails5", $this->animeLimitDetailsGet($limit));
+        $limit = 6;
+        $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
         if (isset($_GET['anime_no'])) {
             $animeNo = $_GET['anime_no'];
             $this->addViews($animeNo); // 조회수 증가
             $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
+            $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
         }
         return "detail" . _EXTENTION_PHP;
     }
@@ -68,13 +71,13 @@ class AnimeController extends Controller
     $this->model->addViews($arrUpdate);
 }
 
-    public function addComment($animeNo, $user_no, $comment_content)
+    public function animeCommentGet($animeNo , $limit)
     {
-        $arrUpdate = array(
-            "anime_no" => $animeNo
-            , "user_no" => $user_no
-            , "comment_content" => $comment_content);
-        $this->model->addComment($arrUpdate);
+        $arrGet = $_GET;
+        $arrGet['anime_no'] = $animeNo;
+        $arrGet['limit_num'] = $limit;
+        $animeComment = $this->model->getComment($arrGet);
+        return $animeComment;
     }
 
 
