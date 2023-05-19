@@ -1,143 +1,15 @@
-//todo---------
-// 업데이트 인서트 작동 안함
-// 고쳐줘... 팔로우 기능... 괜히 욕심 냈나...?
-
-//model
-public function toggleFollow($userId, $animeNo)
-    {
-        // Check if the user is already following the anime
-        $sql = "
-        SELECT follow_flag
-        FROM follows
-        WHERE user_no = (
-            SELECT user_no
-            FROM user_info
-            WHERE user_id = :user_id
-        )
-        AND anime_no = :animeNo
-    ";
-        $params = array(
-            ':user_id' => $userId,
-            ':animeNo' => $animeNo
-        );
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute($params);
-        $row = $stmt->fetch(); // Use fetch() instead of fetchAll()
-
-        if ($row) {
-            $followFlag = $row['follow_flag'] == '0' ? '1' : '0';
-            $sql = "
-            UPDATE follows
-            SET follow_flag = :followFlag
-            WHERE user_no = (
-                SELECT user_no
-                FROM user_info
-                WHERE user_id = :user_id
-            )
-            AND anime_no = :animeNo
-        ";
-        } else {
-            $followFlag = '1';
-            $sql = "
-            INSERT INTO follows (user_no, anime_no, follow_flag)
-            VALUES (
-                (SELECT user_no FROM user_info WHERE user_id = :user_id),
-                :animeNo,
-                :followFlag
-            )
-        ";
-        }
-
-        $params = array(
-            ':user_id' => $userId,
-            ':animeNo' => $animeNo,
-            ':followFlag' => $followFlag
-        );
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute($params);
-
-
-        return $followFlag; // Return the follow flag to update the button status in the controller
-    }
-
-//controller
-public function detailGet()
-    {
-        $animeNo = 1;
-        $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
-        $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
-        $userId = $_SESSION[_STR_LOGIN_ID];
-        $followFlag = $this->model->toggleFollow($userId, $animeNo); // Update the follow flag
-        $this->addDynamicProperty("followFlag", $followFlag); // Pass the follow flag to the view
-        $limit = 4;
-        $this->addDynamicProperty("animeDetails5", $this->animeLimitDetailsGet($limit));
-        $limit = 6;
-        $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
-        if (isset($_GET['anime_no'])) {
-            $animeNo = $_GET['anime_no'];
-            $this->addViews($animeNo); // 조회수 증가
-
-            $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
-            $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
-            $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
-
-            $followFlag = $this->model->toggleFollow($userId, $animeNo); // Update the follow flag
-            $this->addDynamicProperty("followFlag", $followFlag); // Pass the follow flag to the view
-        }
-
-
-        return "detail" . _EXTENTION_PHP;
-    }
-
-    public function detailPost()
-    {
-        $arrPost = $_POST;
-        $animeNo = $arrPost["anime_no"];
-        $userId = $_SESSION[_STR_LOGIN_ID];
-        $commentCont = $arrPost["comment_content"];
-
-        $resultToggle = $this->model->toggleFollow($userId, $animeNo);
-        $data = array(
-            'anime_no' => $animeNo,
-            'id' => $userId,
-            'comment_content' => $commentCont
-        );
-        $this->model->addComment($data);
-        
-
-        return _BASE_REDIRECT . "/anime/detail?anime_no=" . $animeNo;
-    }
-
-//view/detail.php
-<div class="anime__details__btn">
+<form action="/anime/detail/followFlag" method="POST">
+    <input type="hidden" name="anime_no" value="<?php echo isset($_GET["anime_no"]) ? $_GET["anime_no"] : 1;  ?>">
+    <input type="hidden" name="user_no" value="<?php echo isset($_GET["user_no"]) ? $_GET["user_no"] : 1;  ?>">
     <?php if ($this->followFlag == '0') { ?>
-        <a href="" class="follow-btn" data-anime-no="<?php echo $record["anime_no"] ?>" data-user-id="<?php echo $_SESSION[_STR_LOGIN_ID] ?>"><i class="fa fa-heart-o"></i> Follow</a>
+    <div class="anime__details__btn">
+        <a onchange="this.form.submit()"  class="follow-btn" data-anime-no="<?php echo $record["anime_no"] ?>" data-user-id="<?php echo $_SESSION[_STR_LOGIN_ID] ?>"><i class="fa fa-heart-o"></i> Follow</button>
+    </div>
     <?php } else { ?>
-        <a href="" class="follow-btn" data-anime-no="<?php echo $record["anime_no"] ?>" data-user-id="<?php echo $_SESSION[_STR_LOGIN_ID] ?>"><i class="fa fa-heart"></i> Follow</a>
+    <div class="anime__details__btn">
+        <a onchange="this.form.submit()"  class="follow-btn" data-anime-no="<?php echo $record["anime_no"] ?>" data-user-id="<?php echo $_SESSION[_STR_LOGIN_ID] ?>"><i class="fa fa-heart"></i> Follow</button>
+    </div>
     <?php } ?>
-</div>
+    <input type="hidden" name="is_com" value="<?php $this->followFlag == '0' ? '1' : '0' ?>">
+</form>
 
-//js
-
-$(document).on('click', '.follow-btn', function (event) {
-        event.preventDefault();
-        var animeNo = $(this).data('anime-no');
-        var userId = $(this).data('user-id');
-        var followBtn = $(this);
-
-        $.ajax({
-            url: '/anime/detail/toggleFollow', // Update with the actual server endpoint
-            type: 'POST',
-            data: { anime_no: animeNo, user_id: userId },
-            success: function (response) {
-                if (response === '1') {
-                    followBtn.html('<i class="fa fa-heart"></i> Follow');
-                } else {
-                    followBtn.html('<i class="fa fa-heart-o"></i> Follow');
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log(error); // Handle the error accordingly
-            }
-        });
-    });

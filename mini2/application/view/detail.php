@@ -125,13 +125,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="anime__details__btn">
+                                <form action="/anime/detail/followFlag" method="POST">
+                                    <input type="hidden" name="anime_no" value="<?php echo isset($_GET["anime_no"]) ? $_GET["anime_no"] : 1;  ?>">
+                                    <input type="hidden" name="user_no" value="<?php echo isset($_GET["user_no"]) ? $_GET["user_no"] : 1;  ?>">
                                     <?php if ($this->followFlag == '0') { ?>
-                                        <a href="" class="follow-btn" data-anime-no="<?php echo $record["anime_no"] ?>" data-user-id="<?php echo $_SESSION[_STR_LOGIN_ID] ?>"><i class="fa fa-heart-o"></i> Follow</a>
+                                        <div class="anime__details__btn">
+                                            <button type="submit" class="follow-btn" data-anime-no="<?php echo $record["anime_no"] ?>" data-user-id="<?php echo $_SESSION[_STR_LOGIN_ID] ?>"><i class="fa fa-heart-o"></i> Follow</button>
+                                        </div>
                                     <?php } else { ?>
-                                        <a href="" class="follow-btn" data-anime-no="<?php echo $record["anime_no"] ?>" data-user-id="<?php echo $_SESSION[_STR_LOGIN_ID] ?>"><i class="fa fa-heart"></i> Follow</a>
+                                        <div class="anime__details__btn">
+                                            <button type="submit" class="follow-btn" data-anime-no="<?php echo $record["anime_no"] ?>" data-user-id="<?php echo $_SESSION[_STR_LOGIN_ID] ?>"><i class="fa fa-heart"></i> Follow</button>
+                                        </div>
                                     <?php } ?>
-                                </div>
+                                    <!-- <input type="hidden" name="followFlag" value="<?php $this->followFlag == '0' ? '1' : '0' ?>"> -->
+                                </form>
 
                             </div>
                         </div>
@@ -157,10 +164,10 @@
                         <div class="section-title">
                             <h5>Your Comment</h5>
                         </div>
-                        <form action="/anime/detail" method="post">
+                        <form name="form2" action="/anime/detail" method="post">
                             <input type="hidden" name="anime_no" value="<?php echo isset($_GET["anime_no"]) ? $_GET["anime_no"] : 1;  ?>">
                             <input type="hidden" name="user_no" value="<?php echo isset($_GET["user_no"]) ? $_GET["user_no"] : 1;  ?>">
-                            <textarea placeholder="Your Comment" name="comment_content"></textarea>
+                            <textarea placeholder="Your Comment" name="comment_content" required></textarea>
                             <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
                         </form>
                     </div>

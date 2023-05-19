@@ -36,19 +36,35 @@ class AnimeController extends Controller
         $arrPost = $_POST;
         $animeNo = $arrPost["anime_no"];
         $userId = $_SESSION[_STR_LOGIN_ID];
-        $commentCont = $arrPost["comment_content"];
-
-        $resultToggle = $this->model->toggleFollow($userId, $animeNo);
-        $data = array(
-            'anime_no' => $animeNo,
-            'id' => $userId,
-            'comment_content' => $commentCont
-        );
-        $this->model->addComment($data);
+        if($arrPost["comment_content"] == NULL){
+            $this->model->toggleFollow($userId, $animeNo);
+        }else{
+            $commentCont = $arrPost["comment_content"];
+                $data = array(
+                    'anime_no' => $animeNo,
+                    'id' => $userId,
+                    'comment_content' => $commentCont
+                );
+                $this->model->addComment($data);
+        }
         
 
         return _BASE_REDIRECT . "/anime/detail?anime_no=" . $animeNo;
     }
+
+    // public function followFlagPost()
+    // {
+    //     $arrPost = $_POST;
+    //     $animeNo = $arrPost["anime_no"];
+    //     $userId = $_SESSION[_STR_LOGIN_ID];
+        
+            
+        
+
+    //     return _BASE_REDIRECT . "/anime/detail/followFlag?anime_no=" . $animeNo;
+    // }
+
+    
 
 
     public function logoutGet()

@@ -220,7 +220,7 @@ class AnimeModel extends Model
             $stmt->execute($prepare);
             $this->conn->commit();
         } catch (Exception $e) {
-            $this->conn->rollBack();
+            // $this->conn->rollBack();
             echo "UserModel -> getUser Error : " . $e->getMessage();
             exit();
         } finally {
@@ -238,8 +238,10 @@ class AnimeModel extends Model
             SELECT user_no
             FROM user_info
             WHERE user_id = :user_id
+            LIMIT 1
         )
         AND anime_no = :animeNo
+        LIMIT 1
     ";
         $params = array(
             ':user_id' => $userId,
@@ -258,6 +260,7 @@ class AnimeModel extends Model
                 SELECT user_no
                 FROM user_info
                 WHERE user_id = :user_id
+                LIMIT 1
             )
             AND anime_no = :animeNo
         ";
@@ -266,7 +269,7 @@ class AnimeModel extends Model
             $sql = "
             INSERT INTO follows (user_no, anime_no, follow_flag)
             VALUES (
-                (SELECT user_no FROM user_info WHERE user_id = :user_id),
+                (SELECT user_no FROM user_info WHERE user_id = :user_id LIMIT 1),
                 :animeNo,
                 :followFlag
             )
