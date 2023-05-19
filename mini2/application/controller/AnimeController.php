@@ -44,11 +44,17 @@ class AnimeController extends Controller
             'comment_content' => $commentCont
         );
         $this->model->addComment($data);
-        // $this->model->toggleFollow($userId, $animeNo);
-
         
 
         return _BASE_REDIRECT . "/anime/detail?anime_no=" . $animeNo;
+    }
+
+    public function toggleFollow()
+    {
+        $animeNo = $_POST['anime_no'];
+        $userId = $_SESSION[_STR_LOGIN_ID];
+        $followFlag = $this->model->toggleFollow($userId, $animeNo);
+        echo $followFlag;
     }
 
     public function logoutGet()

@@ -280,6 +280,7 @@ class AnimeModel extends Model
         );
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
+        
 
         return $followFlag; // Return the follow flag to update the button status in the controller
     }

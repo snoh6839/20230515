@@ -1,23 +1,42 @@
 //to-do
-// follow 에 따른 버튼 출력
-// insert 전 or not followed ( follow_flag = '0') 일때
-<div class="anime__details__btn">
-        <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
-</div>
-// 그외의 경우
-<div class="anime__details__btn">
-    <a href="#" class="follow-btn"><i class="fa fa-heart"></i> Follow</a>
-</div>
-// + 팔로우 버튼 눌렀을 때 동작 되게 바꾸기
+// 팔로우 버튼 눌렀을 때 동작 되게 고치기
 // mvc 모델 유의 하기
+
+<div class="anime__details__btn">
+    <?php if ($this->followFlag == '1') { ?>
+        <a href="/anime/detail?anime_no=<?php echo $record["anime_no"] ?>" class="follow-btn" onchange="<?php $this->followFlag = '0' ?>"><i class="fa fa-heart-o"></i> Follow</a>
+    <?php } else { ?>
+        <a href="/anime/detail?anime_no=<?php echo $record["anime_no"] ?>" class="follow-btn" onchange="<?php $this->followFlag = '1' ?>"><i class="fa fa-heart"></i> Follow</a>
+    <?php } ?>
+</div>
 
 // model
 public function toggleFollow($userId, $animeNo)
     {
         // Check if the user is already following the anime
         $sql = "
-            SELECT follow_flag
-            FROM follows
+        SELECT follow_flag
+        FROM follows
+        WHERE user_no = (
+            SELECT user_no
+            FROM user_info
+            WHERE user_id = :user_id
+        )
+        AND anime_no = :animeNo
+    ";
+        $params = array(
+            ':user_id' => $userId,
+            ':animeNo' => $animeNo
+        );
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($params);
+        $row = $stmt->fetch(); // Use fetch() instead of fetchAll()
+
+        if ($row) {
+            $followFlag = $row['follow_flag'] == '0' ? '1' : '0';
+            $sql = "
+            UPDATE follows
+            SET follow_flag = :followFlag
             WHERE user_no = (
                 SELECT user_no
                 FROM user_info
@@ -25,36 +44,16 @@ public function toggleFollow($userId, $animeNo)
             )
             AND anime_no = :animeNo
         ";
-        $params = array(
-            ':user_id' => $userId,
-            ':animeNo' => $animeNo
-        );
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute($params);
-        $row = $stmt->fetchAll();
-
-        if ($row) {
-            $followFlag = $row['follow_flag'] == '0' ? '1' : '0';
-            $sql = "
-                UPDATE follows
-                SET follow_flag = :followFlag
-                WHERE user_no = (
-                    SELECT user_no
-                    FROM user_info
-                    WHERE user_id = :user_id
-                )
-                AND anime_no = :animeNo
-            ";
         } else {
             $followFlag = '1';
             $sql = "
-                INSERT INTO follows (user_no, anime_no, follow_flag)
-                VALUES (
-                    (SELECT user_no FROM user_info WHERE user_id = :user_id),
-                    :animeNo,
-                    :followFlag
-                )
-            ";
+            INSERT INTO follows (user_no, anime_no, follow_flag)
+            VALUES (
+                (SELECT user_no FROM user_info WHERE user_id = :user_id),
+                :animeNo,
+                :followFlag
+            )
+        ";
         }
 
         $params = array(
@@ -64,6 +63,8 @@ public function toggleFollow($userId, $animeNo)
         );
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
+
+        return $followFlag; // Return the follow flag to update the button status in the controller
     }
 
 
@@ -73,7 +74,9 @@ public function detailGet()
         $animeNo = 1;
         $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
         $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
-
+        $userId = $_SESSION[_STR_LOGIN_ID];
+        $followFlag = $this->model->toggleFollow($userId, $animeNo); // Update the follow flag
+        $this->addDynamicProperty("followFlag", $followFlag); // Pass the follow flag to the view
         $limit = 4;
         $this->addDynamicProperty("animeDetails5", $this->animeLimitDetailsGet($limit));
         $limit = 6;
@@ -85,7 +88,11 @@ public function detailGet()
             $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
             $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
             $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
+
+            $followFlag = $this->model->toggleFollow($userId, $animeNo); // Update the follow flag
+            $this->addDynamicProperty("followFlag", $followFlag); // Pass the follow flag to the view
         }
+
 
         return "detail" . _EXTENTION_PHP;
     }
@@ -103,115 +110,8 @@ public function detailGet()
             'comment_content' => $commentCont
         );
         $this->model->addComment($data);
-
-        $this->model->toggleFollow($userId, $animeNo);
+        
 
         return _BASE_REDIRECT . "/anime/detail?anime_no=" . $animeNo;
     }
     
-    <div class="anime__details__btn">
-    <?php if ($followFlag == '0') { ?>
-        <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
-    <?php } else { ?>
-        <a href="#" class="follow-btn"><i class="fa fa-heart"></i> Follow</a>
-    <?php } ?>
-</div>
-public function toggleFollow($userId, $animeNo)
-{
-    // Check if the user is already following the anime
-    $sql = "
-        SELECT follow_flag
-        FROM follows
-        WHERE user_no = (
-            SELECT user_no
-            FROM user_info
-            WHERE user_id = :user_id
-        )
-        AND anime_no = :animeNo
-    ";
-    $params = array(
-        ':user_id' => $userId,
-        ':animeNo' => $animeNo
-    );
-    $stmt = $this->conn->prepare($sql);
-    $stmt->execute($params);
-    $row = $stmt->fetch(); // Use fetch() instead of fetchAll()
-
-    if ($row) {
-        $followFlag = $row['follow_flag'] == '0' ? '1' : '0';
-        $sql = "
-            UPDATE follows
-            SET follow_flag = :followFlag
-            WHERE user_no = (
-                SELECT user_no
-                FROM user_info
-                WHERE user_id = :user_id
-            )
-            AND anime_no = :animeNo
-        ";
-    } else {
-        $followFlag = '1';
-        $sql = "
-            INSERT INTO follows (user_no, anime_no, follow_flag)
-            VALUES (
-                (SELECT user_no FROM user_info WHERE user_id = :user_id),
-                :animeNo,
-                :followFlag
-            )
-        ";
-    }
-
-    $params = array(
-        ':user_id' => $userId,
-        ':animeNo' => $animeNo,
-        ':followFlag' => $followFlag
-    );
-    $stmt = $this->conn->prepare($sql);
-    $stmt->execute($params);
-
-    return $followFlag; // Return the follow flag to update the button status in the controller
-}
-public function detailGet()
-{
-    $animeNo = 1;
-    $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
-    $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
-
-    $limit = 4;
-    $this->addDynamicProperty("animeDetails5", $this->animeLimitDetailsGet($limit));
-    $limit = 6;
-    $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
-    if (isset($_GET['anime_no'])) {
-        $animeNo = $_GET['anime_no'];
-        $this->addViews($animeNo); // 조회수 증가
-
-        $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
-        $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
-        $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
-    }
-
-    return "detail" . _EXTENTION_PHP;
-}
-
-public function detailPost()
-{
-    $arrPost = $_POST;
-    $animeNo = $arrPost["anime_no"];
-    $userId = $_SESSION[_STR_LOGIN_ID];
-    $commentCont = $arrPost["comment_content"];
-
-    $data = array(
-        'anime_no' => $animeNo,
-        'id' => $userId,
-        'comment_content' => $commentCont
-    );
-    $this->model->addComment($data);
-
-    $followFlag = $this->model->toggleFollow($userId, $animeNo); // Update the follow flag
-
-    $this->addDynamicProperty("followFlag", $followFlag); // Pass the follow flag to the view
-
-    return _BASE_REDIRECT . "/anime/detail?anime_no=" . $animeNo;
-}
-
-
