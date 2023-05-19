@@ -1,6 +1,6 @@
 //todo---------
-//업데이트 인서트 작동 안함
-// 고쳐줘... 
+// 업데이트 인서트 작동 안함
+// 고쳐줘... 팔로우 기능... 괜히 욕심 냈나...?
 
 //model
 public function toggleFollow($userId, $animeNo)
