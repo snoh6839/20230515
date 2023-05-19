@@ -8,7 +8,7 @@ class UserController extends Controller {
 
     public function loginPost()
     {
-        $result = $this->model->getUser($_POST);
+        $result = $this->model->getUser($_POST, true);
 
         if(count($result) === 0) {
             $errMsg = "Invalid ID or PW";
@@ -29,16 +29,22 @@ class UserController extends Controller {
 
     public function signupGet()
     {
-        // Get the existing user information
-    $existingUserInfo = $this->model->getUser(["id" => $data["origin_id"], "pw" => $data["pw"]]);
         return "signup" . _EXTENTION_PHP;
     }
 
     public function settingGet()
     {
-        // Get the existing user information
-    $existingUserInfo = $this->model->getUser(["id" => $data["origin_id"], "pw" => $data["pw"]]);
+        $this->addDynamicProperty("existingUser", $this->existingUserGet());
         return "setting" . _EXTENTION_PHP;
+    }
+
+    public function existingUserGet()
+    {
+        // Get the existing user information
+        $arrGet = $_GET;
+        $arrGet["id"] = $_SESSION[_STR_LOGIN_ID];
+        $existingUser = $this->model->getUser($arrGet, false);
+        return $existingUser;
     }
 
     public function signupPost()
@@ -97,7 +103,7 @@ class UserController extends Controller {
 
         $result = $this->model->getUserId($arrPost);
         if (count($result) > 0) {
-            $errMsg = ": This User Already Exists. Please Login or Use Another ID";
+            $errMsg = "This User Already Exists. Please Login or Use Another ID";
             $this->addDynamicProperty("errMsg", $errMsg);
             return "setting" . _EXTENTION_PHP;
         }
@@ -123,57 +129,25 @@ class UserController extends Controller {
             return "setting" . _EXTENTION_PHP;
         }
 
-public function settingPost()
-{
-    $arrPost = $_POST;
+        $pwchk = $arrPost["pwchk"];
+        if ($pw !== $pwchk) {
+            $errMsg = "Password does not match Password Check";
+            $this->addDynamicProperty("errMsg", $errMsg);
+            return "setting" . _EXTENTION_PHP;
+        }
 
-    $result = $this->model->getUserId($arrPost);
-    if (count($result) > 0) {
-        $errMsg = "This User Already Exists. Please Login or Use Another ID";
+        $origin_id = $_SESSION[_STR_LOGIN_ID];
+        $data = [
+            'id' => $id,
+            'pw' => $pw,
+            'name' => $name,
+            'origin_id' => $origin_id
+        ];
+        $this->model->updateUser($data);
+        $errMsg = "Successfully Changed.";
         $this->addDynamicProperty("errMsg", $errMsg);
         return "setting" . _EXTENTION_PHP;
     }
-
-    $name = $arrPost["name"];
-    if (!preg_match('/^[가-힣]{2,20}$/u', $name)) {
-        $errMsg = "Name must be between 2 and 20 characters long and can only contain Korean letters";
-        $this->addDynamicProperty("errMsg", $errMsg);
-        return "setting" . _EXTENTION_PHP;
-    }
-
-    $id = $arrPost["id"];
-    if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/', $id)) {
-        $errMsg = "ID must be between 4 and 12 characters long and can only contain letters, numbers, and underscores";
-        $this->addDynamicProperty("errMsg", $errMsg);
-        return "setting" . _EXTENTION_PHP;
-    }
-
-    $pw = $arrPost["pw"];
-    if (!preg_match('/^.{8,20}$/', $pw)) {
-        $errMsg = "Password must be between 8 and 20 characters long";
-        $this->addDynamicProperty("errMsg", $errMsg);
-        return "setting" . _EXTENTION_PHP;
-    }
-
-    $pwchk = $arrPost["pwchk"];
-    if ($pw !== $pwchk) {
-        $errMsg = "Password does not match Password Check";
-        $this->addDynamicProperty("errMsg", $errMsg);
-        return "setting" . _EXTENTION_PHP;
-    }
-
-    $origin_id = $_SESSION[_STR_LOGIN_ID];
-    $data = [
-        'id' => $id,
-        'pw' => $pw,
-        'name' => $name,
-        'origin_id' => $origin_id
-    ];
-    $this->model->updateUser($data);
-    $errMsg = "Successfully Changed.";
-    $this->addDynamicProperty("errMsg", $errMsg);
-    return "setting" . _EXTENTION_PHP;
-}
 }
 
 //이메일 인증 .. 생각만 해봄

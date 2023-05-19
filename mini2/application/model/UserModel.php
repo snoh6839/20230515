@@ -6,7 +6,7 @@ use Exception;
 
 class UserModel extends Model
 {
-    public function getUser($arrUserInfo)
+    public function getUser($arrUserInfo, $pwflg = true)
     {
         $sql = 
         " select "
@@ -14,14 +14,18 @@ class UserModel extends Model
         ." From "
         ." user_info "
         ." where "
-        ." user_id = :id "
-        ." and "
-        ." user_pw = :pw ";
+        ." user_id = :id ";
+        if($pwflg){
+            $sql .= " and "
+            . " user_pw = :pw ";
+        }
 
         $prepare = [
             ":id" => $arrUserInfo["id"]
-            ,":pw" => $arrUserInfo["pw"]
         ];
+        if ($pwflg) {
+            $prepare["pw"] = $arrUserInfo["pw"];
+        }
         try{
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($prepare);
@@ -143,8 +147,8 @@ class UserModel extends Model
 
     public function updateUser($data)
 {
-    
-
+        $existingUserInfo = $this->getUser(["id" => $data["origin_id"], "pw" => $data["pw"]]);
+        return $existingUserInfo;
     // Update the user information
     $sql =
         " UPDATE "

@@ -94,13 +94,14 @@
 
                     <div class="login__form">
                         <h3>Chang Account Setting <span style="color:#917FB3"><?php echo isset($this->errMsg) ? $this->errMsg : ""; ?></span> </h3>
+
                         <form action="/user/setting" method="post">
                             <div class="input__item">
-                                <input type="text" placeholder="Your Name" name="name" id="name" required>
+                                <input type="text" value="<?php echo isset($this->existingUser) ? $this->existingUser[0]["user_name"] : $_POST["name"] ?>" name="name" id="name" required>
                                 <span class="icon_profile"></span>
                             </div>
                             <div class="input__item">
-                                <input type="text" placeholder="Id 4~12" name="id" id="id" required>
+                                <input type="text" value="<?php echo isset($this->existingUser) ? $this->existingUser[0]["user_id"] : $_POST["id"] ?>" name="id" id="id" required>
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">

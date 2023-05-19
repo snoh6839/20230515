@@ -1,147 +1,41 @@
-// todo = 고치기
-// 현재 컨트롤러에서 카테고리 변수를 직접 지정해 주고
-public function animeHeroDetailsGet()
-    {
-        $arrGet = $_GET;
-        $category = 'hero';
-        $arrGet['anime_category'] = $category;
-        $animeDetails = $this->model->getDetail($arrGet);
-        return $animeDetails;
-    }
+//to-do
+// 유저가 follow 를 버튼 누르면
+// 해당 anime_no의 $_SESSION[_STR_LOGIN_ID] = user_no 인 곳의 
+// follow_flag를 '1'이면 '0'으로 '0'이면 '1'로 업데이트 할 수 있게
+// 만들기
 
-// 아래 모델을 불러와서 
-class AnimeModel extends Model
-{
-    public function getDetail($arr)
-    {
-        $sql =
-            " SELECT "
-            . " * "
-            . " FROM "
-            . " anime_data "
-            . " WHERE "
-            . " anime_category = :anime_category "
-            . " ORDER BY "
-            . " views "
-            . " DESC ";
-        // ." LIMIT "
-        // ." :limit_num";
-        
-        $prepare = [
-            // ":anime_no" => $arr["anime_no"],
-            ":anime_category" => $arr["anime_category"]
-        ];
-        try {
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute($prepare);
-            $result = $stmt->fetchAll();
-            return $result; // Return the query results
-        } catch (Exception $e) {
-            throw new Exception("AnimeModel -> getAnime Error: " . $e->getMessage());
-        }
-    }
-}
+CREATE TABLE IF NOT EXISTS `anime_data` (
+  `anime_no` int(11) NOT NULL AUTO_INCREMENT,
+  `anime_name` varchar(255) NOT NULL,
+  `anime_description` text NOT NULL,
+  `anime_type` varchar(255) NOT NULL,
+  `anime_studios` varchar(255) NOT NULL,
+  `anime_date` date NOT NULL,
+  `anime_status` varchar(255) NOT NULL,
+  `anime_genre` varchar(255) NOT NULL,
+  `anime_scores` decimal(3,2) NOT NULL,
+  `anime_rating` decimal(3,2) NOT NULL,
+  `anime_duration` int(11) NOT NULL,
+  `anime_quality` varchar(255) NOT NULL,
+  `views` int(11) NOT NULL DEFAULT 0,
+  `anime_category` varchar(255) NOT NULL,
+  PRIMARY KEY (`anime_no`)
+)
 
-//뷰에서 아래와 같이 출력하고 있는데
-<section class="hero">
-        <div class="container">
-            <div class="hero__slider owl-carousel">
-                <?php foreach ($this->animeHeroDetailsGet() as $record) { ?>
-                    <div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $record["anime_no"] ?>.jpg">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="hero__text">
-                                    <h2><?php echo $record["anime_name"] ?></h2>
-                                    <p><?php echo $record["anime_description"] ?></p>
-                                    <a href="/anime/detail?anime_no=<?php echo $record["anime_no"] ?>"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            </div>
-        </div>
-    </section>
+CREATE TABLE IF NOT EXISTS `user_info` (
+  `user_no` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(255) NOT NULL,
+  `user_pw` varchar(255) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`user_no`)
+)
 
-//컨트롤러에서 addDynamicProperty 를 사용하여 뷰에서 카테고리를 받아와서 넣고
-// 출력도 그냥 컨트롤러에서 제어하고 뷰에서는 불러오기만 하는 형식으로 고쳐야함
-
-//addDynamicProperty
-protected function addDynamicProperty($key, $val)
-    {
-        $this->$key = $val;
-    }
-
-//컨트롤러 예시
-$data = array(
-            'id' => $arrPost['id']
-            , 'pw' => $arrPost['pw']
-            , 'name' => $arrPost['name']
-        );
-        $this->model->setUser($data);
-        $errMsg = ": Successfully Signed Up. Please Login.";
-        $this->addDynamicProperty("errMsg", $errMsg);
-        return "login" . _EXTENTION_PHP;
-        $this->model->closeConn();
-
-//뷰 출력 예시
-<h3>Login <?php echo isset($this->errMsg) ? $this->errMsg : " : You Need to Login"; ?></h3>
-
-
-
-// 수정 아이디어
-
-protected function addDynamicProperty($key, $val)
-{
-    $this->$key = $val;
-}
-
-public function animeHeroDetailsGet($category)
-{
-    $arrGet = $_GET;
-    $arrGet['anime_category'] = $category;
-    $animeDetails = $this->model->getDetail($arrGet);
-    return $animeDetails;
-}
-
-// 뷰에서 출력할 때 카테고리 값을 사용합니다.
-$category = 'hero';
-$this->addDynamicProperty("animeDetails", $this->animeHeroDetailsGet($category));
-
-// 뷰 출력 예시
-<section class="hero">
-    <div class="container">
-        <div class="hero__slider owl-carousel">
-            <?php foreach ($this->animeDetails as $record) { ?>
-                <div class="hero__items set-bg" data-setbg="/img/hero/hero-<?php echo $record["anime_no"] ?>.jpg">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <h2><?php echo $record["anime_name"] ?></h2>
-                                <p><?php echo $record["anime_description"] ?></p>
-                                <a href="/anime/detail?anime_no=<?php echo $record["anime_no"] ?>"><span>View Detail</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-    </div>
-</section>
-
-
-
-
-
-
-// 기존 정보 출력
-    if (!empty($existingUserInfo)) {
-        ?>
-        <h2>기존 정보</h2>
-        <p>사용자 ID: <?php echo $existingUserInfo[0]['user_id']; ?></p>
-        <p>사용자 이름: <?php echo $existingUserInfo[0]['user_name']; ?></p>
-        <hr>
-        <?php
-    }
-    ?>
-
+CREATE TABLE IF NOT EXISTS `follows` (
+  `user_no` int(11) NOT NULL,
+  `anime_no` int(11) NOT NULL,
+  `follow_flag` char(1) NOT NULL DEFAULT '0',
+  KEY `user_no` (`user_no`),
+  KEY `anime_no` (`anime_no`),
+  CONSTRAINT `follows_ibfk_1` FOREIGN KEY (`user_no`) REFERENCES `user_info` (`user_no`),
+  CONSTRAINT `follows_ibfk_2` FOREIGN KEY (`anime_no`) REFERENCES `anime_data` (`anime_no`)
+)
