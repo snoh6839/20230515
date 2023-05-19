@@ -9,6 +9,7 @@
     <a href="#" class="follow-btn"><i class="fa fa-heart"></i> Follow</a>
 </div>
 // + 팔로우 버튼 눌렀을 때 동작 되게 바꾸기
+// mvc 모델 유의 하기
 
 // model
 public function toggleFollow($userId, $animeNo)
