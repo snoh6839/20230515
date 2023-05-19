@@ -2,7 +2,7 @@
 // 유저가 follow 를 버튼 누르면
 // 해당 anime_no의 $_SESSION[_STR_LOGIN_ID] = user_no 인 곳의 
 // follow_flag를 '1'이면 '0'으로 '0'이면 '1'로 업데이트 할 수 있게
-// 만들기
+// mvc모델로 만들기
 
 CREATE TABLE IF NOT EXISTS `anime_data` (
   `anime_no` int(11) NOT NULL AUTO_INCREMENT,
