@@ -126,9 +126,15 @@
                                     </div>
                                 </div>
                                 <div class="anime__details__btn">
-                                    <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
-                                    <!-- <a href="#" class="follow-btn"><i class="fa fa-heart"></i> Follow</a> -->
-                                    <a href="#" class="watch-btn"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                    <!-- <form method="post" action="toggle_follow.php"> -->
+                                        <!-- <input type="hidden" name="anime_no" value="<?php // echo isset($_GET["anime_no"]) ? $_GET["anime_no"] : 1;  ?>"> -->
+
+                                            <!-- <a href="#" class="follow-btn"><i class="fa fa-heart"></i> Follow</a> -->
+
+                                            <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
+
+                                    <!-- </form> -->
+                                    <!-- <a href="#" class="watch-btn"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a> -->
                                 </div>
                             </div>
                         </div>
@@ -156,7 +162,7 @@
                         </div>
                         <form action="/anime/detail" method="post">
                             <input type="hidden" name="anime_no" value="<?php echo isset($_GET["anime_no"]) ? $_GET["anime_no"] : 1;  ?>">
-                            <!-- <input type="hidden" name="user_no" value="<?php echo isset($_GET["user_no"]) ? $_GET["user_no"] : 1;  ?>"> -->
+                            <input type="hidden" name="user_no" value="<?php echo isset($_GET["user_no"]) ? $_GET["user_no"] : 1;  ?>">
                             <textarea placeholder="Your Comment" name="comment_content"></textarea>
                             <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
                         </form>

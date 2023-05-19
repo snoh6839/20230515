@@ -93,7 +93,7 @@
                 <div class="col-lg-6">
 
                     <div class="login__form">
-                        <h3>Chang Account Setting <span style="color:#917FB3"><?php echo isset($this->errMsg) ? $this->errMsg : ""; ?></span> </h3>
+                        <h3>Change Account Setting <span style="color:#917FB3"><?php echo isset($this->errMsg) ? $this->errMsg : ""; ?></span> </h3>
 
                         <form action="/user/setting" method="post">
                             <div class="input__item">
@@ -112,7 +112,7 @@
                                 <input type="Password" placeholder="Password Check" name="pwchk" id="pwchk" required>
                                 <span class="icon_lock"></span>
                             </div>
-                            <button type="submit" class="site-btn">Chang Account</button>
+                            <button type="submit" class="site-btn">Change Account</button>
                         </form>
                         <!-- <h5>Already have an account? <a href="/user/login">Log In!</a></h5> -->
                     </div>

@@ -95,7 +95,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="login__form">
-                        <h3>Login <?php echo isset($this->errMsg) ? $this->errMsg : " : You Need to Login"; ?></h3>
+                        <h3>Login <span style="color:#917FB3"><?php echo isset($this->errMsg) ? $this->errMsg : " : You Need to Login"; ?></span></h3>
                         <form action="/user/login" method="post">
                             <div class="input__item">
                                 <input type="text" placeholder="ID" name="id" id="id" required>

@@ -4,129 +4,133 @@
 // follow_flag를 '1'이면 '0'으로 '0'이면 '1'로 업데이트 할 수 있게
 // mvc모델로 만들기
 
-CREATE TABLE IF NOT EXISTS `anime_data` (
-  `anime_no` int(11) NOT NULL AUTO_INCREMENT,
-  `anime_name` varchar(255) NOT NULL,
-  `anime_description` text NOT NULL,
-  `anime_type` varchar(255) NOT NULL,
-  `anime_studios` varchar(255) NOT NULL,
-  `anime_date` date NOT NULL,
-  `anime_status` varchar(255) NOT NULL,
-  `anime_genre` varchar(255) NOT NULL,
-  `anime_scores` decimal(3,2) NOT NULL,
-  `anime_rating` decimal(3,2) NOT NULL,
-  `anime_duration` int(11) NOT NULL,
-  `anime_quality` varchar(255) NOT NULL,
-  `views` int(11) NOT NULL DEFAULT 0,
-  `anime_category` varchar(255) NOT NULL,
-  PRIMARY KEY (`anime_no`)
-)
-
-CREATE TABLE IF NOT EXISTS `user_info` (
-  `user_no` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(255) NOT NULL,
-  `user_pw` varchar(255) NOT NULL,
-  `user_name` varchar(255) NOT NULL,
-  PRIMARY KEY (`user_no`)
-)
-
-CREATE TABLE IF NOT EXISTS `follows` (
-  `user_no` int(11) NOT NULL,
-  `anime_no` int(11) NOT NULL,
-  `follow_flag` char(1) NOT NULL DEFAULT '0',
-  KEY `user_no` (`user_no`),
-  KEY `anime_no` (`anime_no`),
-  CONSTRAINT `follows_ibfk_1` FOREIGN KEY (`user_no`) REFERENCES `user_info` (`user_no`),
-  CONSTRAINT `follows_ibfk_2` FOREIGN KEY (`anime_no`) REFERENCES `anime_data` (`anime_no`)
-)
-
-<?php
-
-class AnimeModel {
-    private $db;
-
-    public function __construct($db) {
-        $this->db = $db;
-    }
-
-    public function toggleFollow($userNo, $animeNo) {
+// model
+public function toggleFollow($userId, $animeNo)
+    {
         // Check if the user is already following the anime
-        $query = "SELECT follow_flag FROM follows WHERE user_no = :userNo AND anime_no = :animeNo";
-        $params = array(':userNo' => $userNo, ':animeNo' => $animeNo);
-        $stmt = $this->db->prepare($query);
+        $sql = 
+        "SELECT "
+        ." follow_flag "
+        ." FROM "
+        ." follows "
+        ." WHERE "
+        ." user_no = "
+        . " ( SELECT "
+        . " user_no "
+        . " FROM "
+        . " user_info "
+        . " WHERE "
+        . " user_id = :user_id "
+        . " ) "
+        ." anime_no = :animeNo";
+        $params = array(
+            ':user_id' => $userId
+            , ':animeNo' => $animeNo
+        );
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $row = $stmt->fetchAll();
 
         if ($row) {
-            // User is already following, toggle the follow_flag
-            $followFlag = $row['follow_flag'] == '1' ? '0' : '1';
-            $query = "UPDATE follows SET follow_flag = :followFlag WHERE user_no = :userNo AND anime_no = :animeNo";
+            $followFlag = $row['follow_flag'] == '0' ? '1' : '0';
+            $sql = 
+            " UPDATE "
+            ." follows "
+            ." SET "
+            ." follow_flag = :followFlag "
+            ." WHERE "
+            . " user_no = "
+            . " ( SELECT "
+            . " user_no "
+            . " FROM "
+            . " user_info "
+            . " WHERE "
+            . " user_id = :user_id "
+            . " ) "
+            ." AND "
+            ." anime_no = :animeNo";
         } else {
-            // User is not following, insert a new follow record
-            $followFlag = '1';
-            $query = "INSERT INTO follows (user_no, anime_no, follow_flag) VALUES (:userNo, :animeNo, :followFlag)";
+            $followFlag = '0';
+            $sql = 
+            "INSERT INTO "
+            ." follows "
+            ." ( "
+            ." user_no, anime_no, follow_flag "
+            ." ) VALUES ( "
+            ." :userNo, :animeNo, :followFlag "
+            ." )";
         }
 
-        $params = array(':userNo' => $userNo, ':animeNo' => $animeNo, ':followFlag' => $followFlag);
-        $stmt = $this->db->prepare($query);
+        $params = array(
+            ':user_id' => $userId
+            , ':animeNo' => $animeNo
+            , ':followFlag' => $followFlag
+        );
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
     }
-}
-?>
-<?php
 
-class AnimeController {
-    private $model;
 
-    public function __construct($model) {
-        $this->model = $model;
-    }
-
-    public function toggleFollow($userNo, $animeNo) {
-        $this->model->toggleFollow($userNo, $animeNo);
-    }
-}
-?>
-<?php
-
-class AnimeView {
-    public function showToggleFollowButton($userNo, $animeNo, $followFlag) {
-        if ($followFlag == '1') {
-            $text = 'Unfollow';
-        } else {
-            $text = 'Follow';
+//controller (추가 전)
+public function detailGet()
+    {
+        $animeNo = 1;
+        $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
+        $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
+        
+        $limit = 4;
+        $this->addDynamicProperty("animeDetails5", $this->animeLimitDetailsGet($limit));
+        $limit = 6;
+        $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
+        if (isset($_GET['anime_no'])) {
+            $animeNo = $_GET['anime_no'];
+            $this->addViews($animeNo); // 조회수 증가
+            
+            $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
+            $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
+            $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
+            
         }
+        
 
-        $html = '<form method="post" action="toggle_follow.php">';
-        $html .= '<input type="hidden" name="userNo" value="' . $userNo . '">';
-        $html .= '<input type="hidden" name="animeNo" value="' . $animeNo . '">';
-        $html .= '<button type="submit">' . $text . '</button>';
-        $html .= '</form>';
-
-        echo $html;
+        //animeCommentCount
+        
+        return "detail" . _EXTENTION_PHP;
     }
-}
-?>
-<?php
 
-// Include necessary files
-require_once 'anime_model.php';
-require_once 'anime_controller.php';
-require_once 'anime_view.php';
+    public function detailPost()
+    {
+        $arrPost = $_POST;
+        $animeNo = $arrPost["anime_no"];
+        $userId = $_SESSION[_STR_LOGIN_ID];
+        $commentCont = $arrPost["comment_content"];
+        
 
-// Create database connection (Assuming you have already established the connection)
+        $data = array(
+            'anime_no' => $animeNo,
+            'id' => $userId,
+            'comment_content' => $commentCont
+        );
+        $this->model->addComment($data);
 
-// Initialize the components
-$model = new AnimeModel($db);
-$controller = new AnimeController($model);
-$view = new AnimeView();
+        // $follow = array(
+        //     'anime_no' => $animeNo,
+        //     'user_id' => $userId
+        // );
+        // $this->model->toggleFollow($follow);
+        return _BASE_REDIRECT . "/anime/detail?anime_no=". $animeNo;
+    }
 
-// Get user and anime numbers from the request
-$userNo = $_POST['userNo'];
-$animeNo = $_POST['animeNo'];
+//출력 부분
 
-// Toggle the follow
-$controller->toggleFollow($userNo, $animeNo);
+<div class="anime__details__btn">
+<!-- <form method="post" action="toggle_follow.php"> -->
+    <!-- <input type="hidden" name="anime_no" value="<?php // echo isset($_GET["anime_no"]) ? $_GET["anime_no"] : 1;  ?>"> -->
 
-// Display the updated follow button
-$followFlag = $model->getFollowFlag($userNo, $
+        <!-- <a href="#" class="follow-btn"><i class="fa fa-heart"></i> Follow</a> -->
+
+        <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
+
+<!-- </form> -->
+<!-- <a href="#" class="watch-btn"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a> -->
+</div>

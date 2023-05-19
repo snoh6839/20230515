@@ -147,8 +147,8 @@ class UserModel extends Model
 
     public function updateUser($data)
 {
-        $existingUserInfo = $this->getUser(["id" => $data["origin_id"], "pw" => $data["pw"]]);
-        return $existingUserInfo;
+        // $existingUserInfo = $this->getUser(["id" => $data["origin_id"], "pw" => $data["pw"]]);
+        // return $existingUserInfo;
     // Update the user information
     $sql =
         " UPDATE "
@@ -174,7 +174,7 @@ class UserModel extends Model
         $stmt->execute($prepare);
         $this->conn->commit();
     } catch (Exception $e) {
-        // $this->conn->rollBack();
+        $this->conn->rollBack();
         echo "UserModel -> getUser Error: " . $e->getMessage();
         exit();
     } finally {

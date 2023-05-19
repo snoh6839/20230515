@@ -60,28 +60,28 @@ class UserController extends Controller {
 
         $name = $arrPost["name"];
         if (!preg_match('/^[가-힣]{2,20}$/u', $name)) {
-            $errMsg = "Name must be between 2 and 20 characters long and can only contain Korean letters";
+            $errMsg = ": Name must be between 2 and 20 characters long and can only contain Korean letters";
             $this->addDynamicProperty("errMsg", $errMsg);
             return "signup" . _EXTENTION_PHP;
         }
 
         $id = $arrPost["id"];
         if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/', $id)) {
-            $errMsg = "ID must be between 4 and 12 characters long and can only contain letters, numbers, and underscores";
+            $errMsg = ": ID must be between 4 and 12 characters long and can only contain letters, numbers, and underscores";
             $this->addDynamicProperty("errMsg", $errMsg);
             return "signup" . _EXTENTION_PHP;
         }
 
         $pw = $arrPost["pw"];
         if (!preg_match('/^.{8,20}$/', $pw)) {
-            $errMsg = "Password must be between 8 and 20 characters long";
+            $errMsg = ": Password must be between 8 and 20 characters long";
             $this->addDynamicProperty("errMsg", $errMsg);
             return "signup" . _EXTENTION_PHP;
         }
 
         $pwchk = $arrPost["pwchk"];
         if ($pw !== $pwchk) {
-            $errMsg = "Password does not match Password Check";
+            $errMsg = ": Password does not match Password Check";
             $this->addDynamicProperty("errMsg", $errMsg);
             return "signup" . _EXTENTION_PHP;
         }
@@ -102,36 +102,36 @@ class UserController extends Controller {
         $arrPost = $_POST;
 
         $result = $this->model->getUserId($arrPost);
-        if (count($result) > 0) {
-            $errMsg = "This User Already Exists. Please Login or Use Another ID";
+        if ($arrPost["id"] !== $_SESSION[_STR_LOGIN_ID] && count($result) > 0) {
+            $errMsg = ": This User Already Exists. Please Login or Use Another ID";
             $this->addDynamicProperty("errMsg", $errMsg);
             return "setting" . _EXTENTION_PHP;
         }
 
         $name = $arrPost["name"];
         if (!preg_match('/^[가-힣]{2,20}$/u', $name)) {
-            $errMsg = "Name must be between 2 and 20 characters long and can only contain Korean letters";
+            $errMsg = ": Name must be between 2 and 20 characters long and can only contain Korean letters";
             $this->addDynamicProperty("errMsg", $errMsg);
             return "setting" . _EXTENTION_PHP;
         }
 
         $id = $arrPost["id"];
-        if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/', $id)) {
-            $errMsg = "ID must be between 4 and 12 characters long and can only contain letters, numbers, and underscores";
+        if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/u', $id)) {
+            $errMsg = ": ID must be between 4 and 12 characters long and can only contain letters, numbers, and underscores";
             $this->addDynamicProperty("errMsg", $errMsg);
             return "setting" . _EXTENTION_PHP;
         }
 
         $pw = $arrPost["pw"];
-        if (!preg_match('/^.{8,20}$/', $pw)) {
-            $errMsg = "Password must be between 8 and 20 characters long";
+        if (!preg_match('/^[a-zA-Z0-9_]{8,20}$/u', $pw)) {
+            $errMsg = ": Password must be between 8 and 20 characters long and can only contain letters, numbers, and underscores";
             $this->addDynamicProperty("errMsg", $errMsg);
             return "setting" . _EXTENTION_PHP;
         }
 
         $pwchk = $arrPost["pwchk"];
         if ($pw !== $pwchk) {
-            $errMsg = "Password does not match Password Check";
+            $errMsg = ": Password does not match Password Check";
             $this->addDynamicProperty("errMsg", $errMsg);
             return "setting" . _EXTENTION_PHP;
         }
@@ -144,9 +144,9 @@ class UserController extends Controller {
             'origin_id' => $origin_id
         ];
         $this->model->updateUser($data);
-        $errMsg = "Successfully Changed.";
+        $errMsg = ": Successfully Changed. Please Login Again.";
         $this->addDynamicProperty("errMsg", $errMsg);
-        return "setting" . _EXTENTION_PHP;
+        return "login" . _EXTENTION_PHP;
     }
 }
 

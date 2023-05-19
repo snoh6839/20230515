@@ -8,6 +8,7 @@ class AnimeController extends Controller
         $animeNo = 1;
         $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
         $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
+        
         $limit = 4;
         $this->addDynamicProperty("animeDetails5", $this->animeLimitDetailsGet($limit));
         $limit = 6;
@@ -15,9 +16,11 @@ class AnimeController extends Controller
         if (isset($_GET['anime_no'])) {
             $animeNo = $_GET['anime_no'];
             $this->addViews($animeNo); // 조회수 증가
+            
             $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
             $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
             $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
+            
         }
         
 
@@ -40,6 +43,12 @@ class AnimeController extends Controller
             'comment_content' => $commentCont
         );
         $this->model->addComment($data);
+
+        // $follow = array(
+        //     'anime_no' => $animeNo,
+        //     'user_id' => $userId
+        // );
+        // $this->model->toggleFollow($follow);
         return _BASE_REDIRECT . "/anime/detail?anime_no=". $animeNo;
     }
 
@@ -126,11 +135,6 @@ class AnimeController extends Controller
         return $animeCommentCount;
     }
 
+   
 
-
-    public function watchingGet()
-    {
-        return "watching" . _EXTENTION_PHP;
-    }    
-    
 }
