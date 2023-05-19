@@ -134,3 +134,107 @@ public function detailGet()
 <!-- </form> -->
 <!-- <a href="#" class="watch-btn"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a> -->
 </div>
+
+
+
+// model
+public function toggleFollow($userId, $animeNo)
+{
+    // Check if the user is already following the anime
+    $sql = "
+        SELECT follow_flag
+        FROM follows
+        WHERE user_no = (
+            SELECT user_no
+            FROM user_info
+            WHERE user_id = :user_id
+        )
+        AND anime_no = :animeNo
+    ";
+    $params = array(
+        ':user_id' => $userId,
+        ':animeNo' => $animeNo
+    );
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute($params);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($row) {
+        $followFlag = $row['follow_flag'] == '0' ? '1' : '0';
+        $sql = "
+            UPDATE follows
+            SET follow_flag = :followFlag
+            WHERE user_no = (
+                SELECT user_no
+                FROM user_info
+                WHERE user_id = :user_id
+            )
+            AND anime_no = :animeNo
+        ";
+    } else {
+        $followFlag = '1';
+        $sql = "
+            INSERT INTO follows (user_no, anime_no, follow_flag)
+            VALUES (
+                (SELECT user_no FROM user_info WHERE user_id = :user_id),
+                :animeNo,
+                :followFlag
+            )
+        ";
+    }
+
+    $params = array(
+        ':user_id' => $userId,
+        ':animeNo' => $animeNo,
+        ':followFlag' => $followFlag
+    );
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute($params);
+}
+
+// controller
+public function detailGet()
+{
+    $animeNo = 1;
+    $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
+    $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
+        
+    $limit = 4;
+    $this->addDynamicProperty("animeDetails5", $this->animeLimitDetailsGet($limit));
+    $limit = 6;
+    $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
+    if (isset($_GET['anime_no'])) {
+        $animeNo = $_GET['anime_no'];
+        $this->addViews($animeNo); // 조회수 증가
+            
+        $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
+        $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
+        $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
+    }
+
+    return "detail" . _EXTENTION_PHP;
+}
+
+public function detailPost()
+{
+    $arrPost = $_POST;
+    $animeNo = $arrPost["anime_no"];
+    $userId = $_SESSION[_STR_LOGIN_ID];
+    $commentCont = $arrPost["comment_content"];
+
+    $data = array(
+        'anime_no' => $animeNo,
+        'id' => $userId,
+        'comment_content' => $commentCont
+    );
+    $this->model->addComment($data);
+
+    $this->model->toggleFollow($userId, $animeNo);
+
+    return _BASE_REDIRECT . "/anime/detail?anime_no=". $animeNo;
+}
+
+// 출력 부분
+<div class="anime__details__btn">
+    <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
+</div>
