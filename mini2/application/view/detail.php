@@ -137,7 +137,7 @@
                                             <button type="submit" class="follow-btn" data-anime-no="<?php echo $record["anime_no"] ?>" data-user-id="<?php echo $_SESSION[_STR_LOGIN_ID] ?>"><i class="fa fa-heart"></i> Follow</button>
                                         </div>
                                     <?php } ?>
-                                    <!-- <input type="hidden" name="followFlag" value="<?php $this->followFlag == '0' ? '1' : '0' ?>"> -->
+                                    <!-- <input type="hidden" name="followFlag" value="<?php // $this->followFlag == '0' ? '1' : '0' ?>"> -->
                                 </form>
 
                             </div>
