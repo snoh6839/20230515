@@ -38,6 +38,7 @@ class AnimeController extends Controller
         $userId = $_SESSION[_STR_LOGIN_ID];
         $commentCont = $arrPost["comment_content"];
 
+        $resultToggle = $this->model->toggleFollow($userId, $animeNo);
         $data = array(
             'anime_no' => $animeNo,
             'id' => $userId,
@@ -49,13 +50,6 @@ class AnimeController extends Controller
         return _BASE_REDIRECT . "/anime/detail?anime_no=" . $animeNo;
     }
 
-    public function toggleFollow()
-    {
-        $animeNo = $_POST['anime_no'];
-        $userId = $_SESSION[_STR_LOGIN_ID];
-        $followFlag = $this->model->toggleFollow($userId, $animeNo);
-        echo $followFlag;
-    }
 
     public function logoutGet()
     {

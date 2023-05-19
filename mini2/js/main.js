@@ -98,28 +98,6 @@
         return false;
     });
 
-    $(document).on('click', '.follow-btn', function (event) {
-        event.preventDefault();
-        var animeNo = $(this).data('anime-no');
-        var followBtn = $(this);
-
-        $.ajax({
-            url: '/anime/detail?anime_no='.animeNo, // Update with the actual server endpoint
-            type: 'POST',
-            data: { anime_no: animeNo },
-            success: function (response) {
-                if (response === '1') {
-                    followBtn.html('<i class="fa fa-heart"></i> Follow');
-                } else {
-                    followBtn.html('<i class="fa fa-heart-o"></i> Follow');
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log(error); // Handle the error accordingly
-            }
-        });
-    });
-
 })(jQuery);
 
 const recomImg = document.querySelector('.recom-img>img');
@@ -134,3 +112,25 @@ function recomAni() {
 recomAni();
 recomBtn.addEventListener("click", recomAni);
 
+$(document).on('click', '.follow-btn', function (event) {
+        event.preventDefault();
+        var animeNo = $(this).data('anime-no');
+        var userId = $(this).data('user-id');
+        var followBtn = $(this);
+
+        $.ajax({
+            url: '/anime/detail/toggleFollow', // Update with the actual server endpoint
+            type: 'POST',
+            data: { anime_no: animeNo, user_id: userId },
+            success: function (response) {
+                if (response === '1') {
+                    followBtn.html('<i class="fa fa-heart"></i> Follow');
+                } else {
+                    followBtn.html('<i class="fa fa-heart-o"></i> Follow');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(error); // Handle the error accordingly
+            }
+        });
+    });

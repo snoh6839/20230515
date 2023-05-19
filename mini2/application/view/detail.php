@@ -126,10 +126,10 @@
                                     </div>
                                 </div>
                                 <div class="anime__details__btn">
-                                    <?php if ($this->followFlag == '1') { ?>
-                                        <a href="" class="follow-btn" data-anime-no="<?php echo $record["anime_no"] ?>"><i class="fa fa-heart-o"></i> Follow</a>
+                                    <?php if ($this->followFlag == '0') { ?>
+                                        <a href="" class="follow-btn" data-anime-no="<?php echo $record["anime_no"] ?>" data-user-id="<?php echo $_SESSION[_STR_LOGIN_ID] ?>"><i class="fa fa-heart-o"></i> Follow</a>
                                     <?php } else { ?>
-                                        <a href="" class="follow-btn" data-anime-no="<?php echo $record["anime_no"] ?>"><i class="fa fa-heart"></i> Follow</a>
+                                        <a href="" class="follow-btn" data-anime-no="<?php echo $record["anime_no"] ?>" data-user-id="<?php echo $_SESSION[_STR_LOGIN_ID] ?>"><i class="fa fa-heart"></i> Follow</a>
                                     <?php } ?>
                                 </div>
 

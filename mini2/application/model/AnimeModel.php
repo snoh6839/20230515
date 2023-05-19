@@ -215,7 +215,7 @@ class AnimeModel extends Model
             , ":comment_content" => $arr["comment_content"]
         ];
         try {
-            $this->conn->beginTransaction();
+            // $this->conn->beginTransaction();
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($prepare);
             $this->conn->commit();
@@ -224,7 +224,7 @@ class AnimeModel extends Model
             echo "UserModel -> getUser Error : " . $e->getMessage();
             exit();
         } finally {
-            $this->closeConn();
+            // $this->closeConn();
         }
     }
 
@@ -280,7 +280,7 @@ class AnimeModel extends Model
         );
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
-        
+
 
         return $followFlag; // Return the follow flag to update the button status in the controller
     }
