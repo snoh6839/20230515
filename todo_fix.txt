@@ -39,3 +39,94 @@ CREATE TABLE IF NOT EXISTS `follows` (
   CONSTRAINT `follows_ibfk_1` FOREIGN KEY (`user_no`) REFERENCES `user_info` (`user_no`),
   CONSTRAINT `follows_ibfk_2` FOREIGN KEY (`anime_no`) REFERENCES `anime_data` (`anime_no`)
 )
+
+<?php
+
+class AnimeModel {
+    private $db;
+
+    public function __construct($db) {
+        $this->db = $db;
+    }
+
+    public function toggleFollow($userNo, $animeNo) {
+        // Check if the user is already following the anime
+        $query = "SELECT follow_flag FROM follows WHERE user_no = :userNo AND anime_no = :animeNo";
+        $params = array(':userNo' => $userNo, ':animeNo' => $animeNo);
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            // User is already following, toggle the follow_flag
+            $followFlag = $row['follow_flag'] == '1' ? '0' : '1';
+            $query = "UPDATE follows SET follow_flag = :followFlag WHERE user_no = :userNo AND anime_no = :animeNo";
+        } else {
+            // User is not following, insert a new follow record
+            $followFlag = '1';
+            $query = "INSERT INTO follows (user_no, anime_no, follow_flag) VALUES (:userNo, :animeNo, :followFlag)";
+        }
+
+        $params = array(':userNo' => $userNo, ':animeNo' => $animeNo, ':followFlag' => $followFlag);
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+    }
+}
+?>
+<?php
+
+class AnimeController {
+    private $model;
+
+    public function __construct($model) {
+        $this->model = $model;
+    }
+
+    public function toggleFollow($userNo, $animeNo) {
+        $this->model->toggleFollow($userNo, $animeNo);
+    }
+}
+?>
+<?php
+
+class AnimeView {
+    public function showToggleFollowButton($userNo, $animeNo, $followFlag) {
+        if ($followFlag == '1') {
+            $text = 'Unfollow';
+        } else {
+            $text = 'Follow';
+        }
+
+        $html = '<form method="post" action="toggle_follow.php">';
+        $html .= '<input type="hidden" name="userNo" value="' . $userNo . '">';
+        $html .= '<input type="hidden" name="animeNo" value="' . $animeNo . '">';
+        $html .= '<button type="submit">' . $text . '</button>';
+        $html .= '</form>';
+
+        echo $html;
+    }
+}
+?>
+<?php
+
+// Include necessary files
+require_once 'anime_model.php';
+require_once 'anime_controller.php';
+require_once 'anime_view.php';
+
+// Create database connection (Assuming you have already established the connection)
+
+// Initialize the components
+$model = new AnimeModel($db);
+$controller = new AnimeController($model);
+$view = new AnimeView();
+
+// Get user and anime numbers from the request
+$userNo = $_POST['userNo'];
+$animeNo = $_POST['animeNo'];
+
+// Toggle the follow
+$controller->toggleFollow($userNo, $animeNo);
+
+// Display the updated follow button
+$followFlag = $model->getFollowFlag($userNo, $
