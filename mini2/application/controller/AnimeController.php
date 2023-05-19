@@ -8,7 +8,7 @@ class AnimeController extends Controller
         $animeNo = 1;
         $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
         $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
-        
+
         $limit = 4;
         $this->addDynamicProperty("animeDetails5", $this->animeLimitDetailsGet($limit));
         $limit = 6;
@@ -16,16 +16,12 @@ class AnimeController extends Controller
         if (isset($_GET['anime_no'])) {
             $animeNo = $_GET['anime_no'];
             $this->addViews($animeNo); // 조회수 증가
-            
+
             $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
             $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
             $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
-            
         }
-        
 
-        //animeCommentCount
-        
         return "detail" . _EXTENTION_PHP;
     }
 
@@ -35,7 +31,6 @@ class AnimeController extends Controller
         $animeNo = $arrPost["anime_no"];
         $userId = $_SESSION[_STR_LOGIN_ID];
         $commentCont = $arrPost["comment_content"];
-        
 
         $data = array(
             'anime_no' => $animeNo,
@@ -44,12 +39,9 @@ class AnimeController extends Controller
         );
         $this->model->addComment($data);
 
-        // $follow = array(
-        //     'anime_no' => $animeNo,
-        //     'user_id' => $userId
-        // );
-        // $this->model->toggleFollow($follow);
-        return _BASE_REDIRECT . "/anime/detail?anime_no=". $animeNo;
+        $this->model->toggleFollow($userId, $animeNo);
+
+        return _BASE_REDIRECT . "/anime/detail?anime_no=" . $animeNo;
     }
 
     public function logoutGet()
@@ -134,7 +126,5 @@ class AnimeController extends Controller
         $animeCommentCount = $this->model->commentCount($arrGet);
         return $animeCommentCount;
     }
-
-   
 
 }

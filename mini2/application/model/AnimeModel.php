@@ -231,24 +231,19 @@ class AnimeModel extends Model
     public function toggleFollow($userId, $animeNo)
     {
         // Check if the user is already following the anime
-        $sql = 
-        "SELECT "
-        ." follow_flag "
-        ." FROM "
-        ." follows "
-        ." WHERE "
-        ." user_no = "
-        . " ( SELECT "
-        . " user_no "
-        . " FROM "
-        . " user_info "
-        . " WHERE "
-        . " user_id = :user_id "
-        . " ) "
-        ." anime_no = :animeNo";
+        $sql = "
+            SELECT follow_flag
+            FROM follows
+            WHERE user_no = (
+                SELECT user_no
+                FROM user_info
+                WHERE user_id = :user_id
+            )
+            AND anime_no = :animeNo
+        ";
         $params = array(
-            ':user_id' => $userId
-            , ':animeNo' => $animeNo
+            ':user_id' => $userId,
+            ':animeNo' => $animeNo
         );
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
@@ -256,38 +251,32 @@ class AnimeModel extends Model
 
         if ($row) {
             $followFlag = $row['follow_flag'] == '0' ? '1' : '0';
-            $sql = 
-            " UPDATE "
-            ." follows "
-            ." SET "
-            ." follow_flag = :followFlag "
-            ." WHERE "
-            . " user_no = "
-            . " ( SELECT "
-            . " user_no "
-            . " FROM "
-            . " user_info "
-            . " WHERE "
-            . " user_id = :user_id "
-            . " ) "
-            ." AND "
-            ." anime_no = :animeNo";
+            $sql = "
+                UPDATE follows
+                SET follow_flag = :followFlag
+                WHERE user_no = (
+                    SELECT user_no
+                    FROM user_info
+                    WHERE user_id = :user_id
+                )
+                AND anime_no = :animeNo
+            ";
         } else {
-            $followFlag = '0';
-            $sql = 
-            "INSERT INTO "
-            ." follows "
-            ." ( "
-            ." user_no, anime_no, follow_flag "
-            ." ) VALUES ( "
-            ." :userNo, :animeNo, :followFlag "
-            ." )";
+            $followFlag = '1';
+            $sql = "
+                INSERT INTO follows (user_no, anime_no, follow_flag)
+                VALUES (
+                    (SELECT user_no FROM user_info WHERE user_id = :user_id),
+                    :animeNo,
+                    :followFlag
+                )
+            ";
         }
 
         $params = array(
-            ':user_id' => $userId
-            , ':animeNo' => $animeNo
-            , ':followFlag' => $followFlag
+            ':user_id' => $userId,
+            ':animeNo' => $animeNo,
+            ':followFlag' => $followFlag
         );
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
