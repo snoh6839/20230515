@@ -126,15 +126,11 @@
                                     </div>
                                 </div>
                                 <div class="anime__details__btn">
-                                    <!-- <form method="post" action="toggle_follow.php"> -->
-                                        <!-- <input type="hidden" name="anime_no" value="<?php // echo isset($_GET["anime_no"]) ? $_GET["anime_no"] : 1;  ?>"> -->
-
-                                            <!-- <a href="#" class="follow-btn"><i class="fa fa-heart"></i> Follow</a> -->
-
-                                            <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
-
-                                    <!-- </form> -->
-                                    <!-- <a href="#" class="watch-btn"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a> -->
+                                    <?php if (isset($this->followFlag) == '1') { ?>
+                                        <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
+                                    <?php } else { ?>
+                                        <a href="#" class="follow-btn"><i class="fa fa-heart"></i> Follow</a>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

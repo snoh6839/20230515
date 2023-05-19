@@ -8,7 +8,9 @@ class AnimeController extends Controller
         $animeNo = 1;
         $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
         $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
-
+        $userId = $_SESSION[_STR_LOGIN_ID];
+        $followFlag = $this->model->toggleFollow($userId, $animeNo); // Update the follow flag
+        $this->addDynamicProperty("followFlag", $followFlag); // Pass the follow flag to the view
         $limit = 4;
         $this->addDynamicProperty("animeDetails5", $this->animeLimitDetailsGet($limit));
         $limit = 6;
@@ -20,7 +22,11 @@ class AnimeController extends Controller
             $this->addDynamicProperty("animeDetails", $this->animeDetailsGet($animeNo));
             $this->addDynamicProperty("animeCommentCount", $this->animeCommentCountGet($animeNo));
             $this->addDynamicProperty("animeComment", $this->animeCommentGet($animeNo, $limit));
+
+            $followFlag = $this->model->toggleFollow($userId, $animeNo); // Update the follow flag
+            $this->addDynamicProperty("followFlag", $followFlag); // Pass the follow flag to the view
         }
+
 
         return "detail" . _EXTENTION_PHP;
     }
@@ -38,8 +44,9 @@ class AnimeController extends Controller
             'comment_content' => $commentCont
         );
         $this->model->addComment($data);
+        // $this->model->toggleFollow($userId, $animeNo);
 
-        $this->model->toggleFollow($userId, $animeNo);
+        
 
         return _BASE_REDIRECT . "/anime/detail?anime_no=" . $animeNo;
     }

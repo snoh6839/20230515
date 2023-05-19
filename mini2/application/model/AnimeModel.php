@@ -232,8 +232,28 @@ class AnimeModel extends Model
     {
         // Check if the user is already following the anime
         $sql = "
-            SELECT follow_flag
-            FROM follows
+        SELECT follow_flag
+        FROM follows
+        WHERE user_no = (
+            SELECT user_no
+            FROM user_info
+            WHERE user_id = :user_id
+        )
+        AND anime_no = :animeNo
+    ";
+        $params = array(
+            ':user_id' => $userId,
+            ':animeNo' => $animeNo
+        );
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($params);
+        $row = $stmt->fetch(); // Use fetch() instead of fetchAll()
+
+        if ($row) {
+            $followFlag = $row['follow_flag'] == '0' ? '1' : '0';
+            $sql = "
+            UPDATE follows
+            SET follow_flag = :followFlag
             WHERE user_no = (
                 SELECT user_no
                 FROM user_info
@@ -241,36 +261,16 @@ class AnimeModel extends Model
             )
             AND anime_no = :animeNo
         ";
-        $params = array(
-            ':user_id' => $userId,
-            ':animeNo' => $animeNo
-        );
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute($params);
-        $row = $stmt->fetchAll();
-
-        if ($row) {
-            $followFlag = $row['follow_flag'] == '0' ? '1' : '0';
-            $sql = "
-                UPDATE follows
-                SET follow_flag = :followFlag
-                WHERE user_no = (
-                    SELECT user_no
-                    FROM user_info
-                    WHERE user_id = :user_id
-                )
-                AND anime_no = :animeNo
-            ";
         } else {
             $followFlag = '1';
             $sql = "
-                INSERT INTO follows (user_no, anime_no, follow_flag)
-                VALUES (
-                    (SELECT user_no FROM user_info WHERE user_id = :user_id),
-                    :animeNo,
-                    :followFlag
-                )
-            ";
+            INSERT INTO follows (user_no, anime_no, follow_flag)
+            VALUES (
+                (SELECT user_no FROM user_info WHERE user_id = :user_id),
+                :animeNo,
+                :followFlag
+            )
+        ";
         }
 
         $params = array(
@@ -280,6 +280,8 @@ class AnimeModel extends Model
         );
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
+
+        return $followFlag; // Return the follow flag to update the button status in the controller
     }
 
 }
